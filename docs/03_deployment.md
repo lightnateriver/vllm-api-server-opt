@@ -40,6 +40,7 @@ export ALLOWED_LOCAL_MEDIA_PATH=/path/to/0428/data
 - `http`
 
 建议优先使用 `local_path` 做功能与精度验证。
+如需让 `http` 输入也复用 direct encode 优化路径，请使用 `phase4`。
 
 ## 启动命令
 
@@ -73,6 +74,23 @@ export ALLOWED_LOCAL_MEDIA_PATH=/path/to/0428/data
 export MODEL_DIR=/path/to/Qwen3.5-4B
 export ALLOWED_LOCAL_MEDIA_PATH=/path/to/0428/data
 /path/to/0428/bundle/start_phase3_server.sh
+```
+
+### phase4 http direct encode
+
+```bash
+export MODEL_DIR=/path/to/Qwen3.5-4B
+export ALLOWED_LOCAL_MEDIA_PATH=/path/to/0428/data
+/path/to/0428/bundle/start_phase4_server.sh
+```
+
+可选 HTTP cache 配置：
+
+```bash
+export VLLM_ASCEND_HTTP_CACHE_DIR=/tmp/vllm_ascend_http_cache
+export VLLM_ASCEND_HTTP_CACHE_TTL_S=86400
+export VLLM_ASCEND_HTTP_TIMEOUT_S=30
+export VLLM_ASCEND_HTTP_MAX_FILE_BYTES=67108864
 ```
 
 ## 推荐的 tp4 启动参数

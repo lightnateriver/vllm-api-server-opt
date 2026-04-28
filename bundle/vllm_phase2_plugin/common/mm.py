@@ -209,6 +209,7 @@ def extract_image_source_metadata_from_mm_data(mm_data) -> dict[str, list[dict |
             "media_uuid": getattr(item, "_phase2_media_uuid", None),
             "request_scope_key": getattr(item, "_phase2_request_scope_key", None),
             "source_key": getattr(item, "_phase2_source_key", None),
+            "image_url": getattr(item, "_phase2_image_url", None),
         }
         if any(isinstance(value, str) for value in entry.values()):
             has_entry = True

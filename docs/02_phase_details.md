@@ -88,6 +88,28 @@
   - `http`
 - 当前主要剩余问题是多图精度，不是服务稳定性
 
+## phase4
+
+设计目标：
+
+- 让 `http` 输入也能获得 `phase3 direct encode` 的收益
+- 不修改 `vllm` / `vllm-ascend` 源码
+- 仅通过 `0428` patch 增量实现
+
+实现方案：
+
+- `VLLM_ASCEND_API_OPT_PHASE=4`
+- API server 先把 `http/https` 图片下载到本地缓存池
+- 下载后构造 phase3-style local image ref
+- worker 继续复用 `phase3 direct encode`
+
+链路特点：
+
+- transport 身份仍然记录为 `http`
+- 但 worker 消费的是缓存后的本地文件路径
+- 下载失败时回退到 stock `http` 图片处理路径
+- `local_path` / `base64` 逻辑不受影响
+
 ## 不再继续维护的旧实验路径
 
 下列历史实验路径不再作为当前目录的推荐方案：
