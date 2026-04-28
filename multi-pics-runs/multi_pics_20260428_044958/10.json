@@ -1,0 +1,83 @@
+{
+  "case_id": "10",
+  "image_count": 10,
+  "question_type": "index",
+  "question": "Which image is the green rectangle? Answer only one number.",
+  "gold_answer": "1",
+  "target": {
+    "index": 1,
+    "shape": "rectangle",
+    "color": "green",
+    "filename": "01_green_rectangle.jpg"
+  },
+  "images": [
+    {
+      "index": 1,
+      "shape": "rectangle",
+      "color": "green",
+      "filename": "01_green_rectangle.jpg"
+    },
+    {
+      "index": 2,
+      "shape": "circle",
+      "color": "purple",
+      "filename": "02_purple_circle.jpg"
+    },
+    {
+      "index": 3,
+      "shape": "cube",
+      "color": "orange",
+      "filename": "03_orange_cube.jpg"
+    },
+    {
+      "index": 4,
+      "shape": "square",
+      "color": "orange",
+      "filename": "04_orange_square.jpg"
+    },
+    {
+      "index": 5,
+      "shape": "rectangle",
+      "color": "brown",
+      "filename": "05_brown_rectangle.jpg"
+    },
+    {
+      "index": 6,
+      "shape": "triangle",
+      "color": "blue",
+      "filename": "06_blue_triangle.jpg"
+    },
+    {
+      "index": 7,
+      "shape": "square",
+      "color": "green",
+      "filename": "07_green_square.jpg"
+    },
+    {
+      "index": 8,
+      "shape": "circle",
+      "color": "green",
+      "filename": "08_green_circle.jpg"
+    },
+    {
+      "index": 9,
+      "shape": "cube",
+      "color": "brown",
+      "filename": "09_brown_cube.jpg"
+    },
+    {
+      "index": 10,
+      "shape": "rectangle",
+      "color": "yellow",
+      "filename": "10_yellow_rectangle.jpg"
+    }
+  ],
+  "media_mode": "local_path",
+  "status": "correct",
+  "error_type": "ok",
+  "raw_prediction": "1",
+  "extracted_prediction": "1",
+  "strict_raw_ok": true,
+  "latency_sec": 1.719,
+  "finish_reason": "stop"
+}

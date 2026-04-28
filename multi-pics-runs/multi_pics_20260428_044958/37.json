@@ -1,0 +1,245 @@
+{
+  "case_id": "37",
+  "image_count": 37,
+  "question_type": "index",
+  "question": "Which image is the pink rhombus? Answer only one number.",
+  "gold_answer": "5",
+  "target": {
+    "index": 5,
+    "shape": "rhombus",
+    "color": "pink",
+    "filename": "05_pink_rhombus.jpg"
+  },
+  "images": [
+    {
+      "index": 1,
+      "shape": "rhombus",
+      "color": "blue",
+      "filename": "01_blue_rhombus.jpg"
+    },
+    {
+      "index": 2,
+      "shape": "cylinder",
+      "color": "purple",
+      "filename": "02_purple_cylinder.jpg"
+    },
+    {
+      "index": 3,
+      "shape": "rectangle",
+      "color": "red",
+      "filename": "03_red_rectangle.jpg"
+    },
+    {
+      "index": 4,
+      "shape": "rhombus",
+      "color": "green",
+      "filename": "04_green_rhombus.jpg"
+    },
+    {
+      "index": 5,
+      "shape": "rhombus",
+      "color": "pink",
+      "filename": "05_pink_rhombus.jpg"
+    },
+    {
+      "index": 6,
+      "shape": "square",
+      "color": "white",
+      "filename": "06_white_square.jpg"
+    },
+    {
+      "index": 7,
+      "shape": "square",
+      "color": "green",
+      "filename": "07_green_square.jpg"
+    },
+    {
+      "index": 8,
+      "shape": "cone",
+      "color": "blue",
+      "filename": "08_blue_cone.jpg"
+    },
+    {
+      "index": 9,
+      "shape": "triangle",
+      "color": "green",
+      "filename": "09_green_triangle.jpg"
+    },
+    {
+      "index": 10,
+      "shape": "square",
+      "color": "red",
+      "filename": "10_red_square.jpg"
+    },
+    {
+      "index": 11,
+      "shape": "cone",
+      "color": "white",
+      "filename": "11_white_cone.jpg"
+    },
+    {
+      "index": 12,
+      "shape": "cylinder",
+      "color": "brown",
+      "filename": "12_brown_cylinder.jpg"
+    },
+    {
+      "index": 13,
+      "shape": "cube",
+      "color": "red",
+      "filename": "13_red_cube.jpg"
+    },
+    {
+      "index": 14,
+      "shape": "rectangle",
+      "color": "black",
+      "filename": "14_black_rectangle.jpg"
+    },
+    {
+      "index": 15,
+      "shape": "rhombus",
+      "color": "orange",
+      "filename": "15_orange_rhombus.jpg"
+    },
+    {
+      "index": 16,
+      "shape": "cube",
+      "color": "brown",
+      "filename": "16_brown_cube.jpg"
+    },
+    {
+      "index": 17,
+      "shape": "square",
+      "color": "blue",
+      "filename": "17_blue_square.jpg"
+    },
+    {
+      "index": 18,
+      "shape": "square",
+      "color": "pink",
+      "filename": "18_pink_square.jpg"
+    },
+    {
+      "index": 19,
+      "shape": "rhombus",
+      "color": "black",
+      "filename": "19_black_rhombus.jpg"
+    },
+    {
+      "index": 20,
+      "shape": "cylinder",
+      "color": "black",
+      "filename": "20_black_cylinder.jpg"
+    },
+    {
+      "index": 21,
+      "shape": "rhombus",
+      "color": "white",
+      "filename": "21_white_rhombus.jpg"
+    },
+    {
+      "index": 22,
+      "shape": "cylinder",
+      "color": "yellow",
+      "filename": "22_yellow_cylinder.jpg"
+    },
+    {
+      "index": 23,
+      "shape": "triangle",
+      "color": "red",
+      "filename": "23_red_triangle.jpg"
+    },
+    {
+      "index": 24,
+      "shape": "cylinder",
+      "color": "white",
+      "filename": "24_white_cylinder.jpg"
+    },
+    {
+      "index": 25,
+      "shape": "square",
+      "color": "orange",
+      "filename": "25_orange_square.jpg"
+    },
+    {
+      "index": 26,
+      "shape": "cube",
+      "color": "purple",
+      "filename": "26_purple_cube.jpg"
+    },
+    {
+      "index": 27,
+      "shape": "circle",
+      "color": "white",
+      "filename": "27_white_circle.jpg"
+    },
+    {
+      "index": 28,
+      "shape": "rectangle",
+      "color": "pink",
+      "filename": "28_pink_rectangle.jpg"
+    },
+    {
+      "index": 29,
+      "shape": "cone",
+      "color": "purple",
+      "filename": "29_purple_cone.jpg"
+    },
+    {
+      "index": 30,
+      "shape": "triangle",
+      "color": "orange",
+      "filename": "30_orange_triangle.jpg"
+    },
+    {
+      "index": 31,
+      "shape": "cylinder",
+      "color": "orange",
+      "filename": "31_orange_cylinder.jpg"
+    },
+    {
+      "index": 32,
+      "shape": "circle",
+      "color": "purple",
+      "filename": "32_purple_circle.jpg"
+    },
+    {
+      "index": 33,
+      "shape": "triangle",
+      "color": "brown",
+      "filename": "33_brown_triangle.jpg"
+    },
+    {
+      "index": 34,
+      "shape": "triangle",
+      "color": "pink",
+      "filename": "34_pink_triangle.jpg"
+    },
+    {
+      "index": 35,
+      "shape": "circle",
+      "color": "red",
+      "filename": "35_red_circle.jpg"
+    },
+    {
+      "index": 36,
+      "shape": "square",
+      "color": "yellow",
+      "filename": "36_yellow_square.jpg"
+    },
+    {
+      "index": 37,
+      "shape": "rectangle",
+      "color": "green",
+      "filename": "37_green_rectangle.jpg"
+    }
+  ],
+  "media_mode": "local_path",
+  "status": "correct",
+  "error_type": "ok",
+  "raw_prediction": "5",
+  "extracted_prediction": "5",
+  "strict_raw_ok": true,
+  "latency_sec": 4.495,
+  "finish_reason": "stop"
+}

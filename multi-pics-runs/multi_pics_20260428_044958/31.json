@@ -1,0 +1,209 @@
+{
+  "case_id": "31",
+  "image_count": 31,
+  "question_type": "index",
+  "question": "Which image is the white rhombus? Answer only one number.",
+  "gold_answer": "10",
+  "target": {
+    "index": 10,
+    "shape": "rhombus",
+    "color": "white",
+    "filename": "10_white_rhombus.jpg"
+  },
+  "images": [
+    {
+      "index": 1,
+      "shape": "cone",
+      "color": "green",
+      "filename": "01_green_cone.jpg"
+    },
+    {
+      "index": 2,
+      "shape": "cylinder",
+      "color": "black",
+      "filename": "02_black_cylinder.jpg"
+    },
+    {
+      "index": 3,
+      "shape": "circle",
+      "color": "purple",
+      "filename": "03_purple_circle.jpg"
+    },
+    {
+      "index": 4,
+      "shape": "cube",
+      "color": "yellow",
+      "filename": "04_yellow_cube.jpg"
+    },
+    {
+      "index": 5,
+      "shape": "cylinder",
+      "color": "red",
+      "filename": "05_red_cylinder.jpg"
+    },
+    {
+      "index": 6,
+      "shape": "cube",
+      "color": "black",
+      "filename": "06_black_cube.jpg"
+    },
+    {
+      "index": 7,
+      "shape": "triangle",
+      "color": "white",
+      "filename": "07_white_triangle.jpg"
+    },
+    {
+      "index": 8,
+      "shape": "cone",
+      "color": "white",
+      "filename": "08_white_cone.jpg"
+    },
+    {
+      "index": 9,
+      "shape": "cone",
+      "color": "red",
+      "filename": "09_red_cone.jpg"
+    },
+    {
+      "index": 10,
+      "shape": "rhombus",
+      "color": "white",
+      "filename": "10_white_rhombus.jpg"
+    },
+    {
+      "index": 11,
+      "shape": "cone",
+      "color": "black",
+      "filename": "11_black_cone.jpg"
+    },
+    {
+      "index": 12,
+      "shape": "triangle",
+      "color": "pink",
+      "filename": "12_pink_triangle.jpg"
+    },
+    {
+      "index": 13,
+      "shape": "circle",
+      "color": "black",
+      "filename": "13_black_circle.jpg"
+    },
+    {
+      "index": 14,
+      "shape": "rectangle",
+      "color": "black",
+      "filename": "14_black_rectangle.jpg"
+    },
+    {
+      "index": 15,
+      "shape": "cone",
+      "color": "brown",
+      "filename": "15_brown_cone.jpg"
+    },
+    {
+      "index": 16,
+      "shape": "cube",
+      "color": "green",
+      "filename": "16_green_cube.jpg"
+    },
+    {
+      "index": 17,
+      "shape": "rhombus",
+      "color": "yellow",
+      "filename": "17_yellow_rhombus.jpg"
+    },
+    {
+      "index": 18,
+      "shape": "cube",
+      "color": "brown",
+      "filename": "18_brown_cube.jpg"
+    },
+    {
+      "index": 19,
+      "shape": "rectangle",
+      "color": "blue",
+      "filename": "19_blue_rectangle.jpg"
+    },
+    {
+      "index": 20,
+      "shape": "circle",
+      "color": "white",
+      "filename": "20_white_circle.jpg"
+    },
+    {
+      "index": 21,
+      "shape": "square",
+      "color": "brown",
+      "filename": "21_brown_square.jpg"
+    },
+    {
+      "index": 22,
+      "shape": "rhombus",
+      "color": "orange",
+      "filename": "22_orange_rhombus.jpg"
+    },
+    {
+      "index": 23,
+      "shape": "square",
+      "color": "yellow",
+      "filename": "23_yellow_square.jpg"
+    },
+    {
+      "index": 24,
+      "shape": "rectangle",
+      "color": "orange",
+      "filename": "24_orange_rectangle.jpg"
+    },
+    {
+      "index": 25,
+      "shape": "circle",
+      "color": "pink",
+      "filename": "25_pink_circle.jpg"
+    },
+    {
+      "index": 26,
+      "shape": "rhombus",
+      "color": "red",
+      "filename": "26_red_rhombus.jpg"
+    },
+    {
+      "index": 27,
+      "shape": "square",
+      "color": "orange",
+      "filename": "27_orange_square.jpg"
+    },
+    {
+      "index": 28,
+      "shape": "cone",
+      "color": "pink",
+      "filename": "28_pink_cone.jpg"
+    },
+    {
+      "index": 29,
+      "shape": "cylinder",
+      "color": "purple",
+      "filename": "29_purple_cylinder.jpg"
+    },
+    {
+      "index": 30,
+      "shape": "circle",
+      "color": "orange",
+      "filename": "30_orange_circle.jpg"
+    },
+    {
+      "index": 31,
+      "shape": "rectangle",
+      "color": "purple",
+      "filename": "31_purple_rectangle.jpg"
+    }
+  ],
+  "media_mode": "local_path",
+  "status": "correct",
+  "error_type": "ok",
+  "raw_prediction": "10",
+  "extracted_prediction": "10",
+  "strict_raw_ok": true,
+  "latency_sec": 3.869,
+  "finish_reason": "stop"
+}

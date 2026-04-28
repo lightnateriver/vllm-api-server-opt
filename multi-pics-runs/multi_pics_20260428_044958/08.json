@@ -1,0 +1,71 @@
+{
+  "case_id": "08",
+  "image_count": 8,
+  "question_type": "index",
+  "question": "Which image is the orange cone? Answer only one number.",
+  "gold_answer": "8",
+  "target": {
+    "index": 8,
+    "shape": "cone",
+    "color": "orange",
+    "filename": "08_orange_cone.jpg"
+  },
+  "images": [
+    {
+      "index": 1,
+      "shape": "cone",
+      "color": "pink",
+      "filename": "01_pink_cone.jpg"
+    },
+    {
+      "index": 2,
+      "shape": "rectangle",
+      "color": "brown",
+      "filename": "02_brown_rectangle.jpg"
+    },
+    {
+      "index": 3,
+      "shape": "rhombus",
+      "color": "black",
+      "filename": "03_black_rhombus.jpg"
+    },
+    {
+      "index": 4,
+      "shape": "cone",
+      "color": "red",
+      "filename": "04_red_cone.jpg"
+    },
+    {
+      "index": 5,
+      "shape": "rectangle",
+      "color": "green",
+      "filename": "05_green_rectangle.jpg"
+    },
+    {
+      "index": 6,
+      "shape": "cube",
+      "color": "blue",
+      "filename": "06_blue_cube.jpg"
+    },
+    {
+      "index": 7,
+      "shape": "rectangle",
+      "color": "red",
+      "filename": "07_red_rectangle.jpg"
+    },
+    {
+      "index": 8,
+      "shape": "cone",
+      "color": "orange",
+      "filename": "08_orange_cone.jpg"
+    }
+  ],
+  "media_mode": "local_path",
+  "status": "correct",
+  "error_type": "ok",
+  "raw_prediction": "8",
+  "extracted_prediction": "8",
+  "strict_raw_ok": true,
+  "latency_sec": 1.554,
+  "finish_reason": "stop"
+}

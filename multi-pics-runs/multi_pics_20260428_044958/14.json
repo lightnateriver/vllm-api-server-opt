@@ -1,0 +1,107 @@
+{
+  "case_id": "14",
+  "image_count": 14,
+  "question_type": "index",
+  "question": "Which image is the brown triangle? Answer only one number.",
+  "gold_answer": "12",
+  "target": {
+    "index": 12,
+    "shape": "triangle",
+    "color": "brown",
+    "filename": "12_brown_triangle.jpg"
+  },
+  "images": [
+    {
+      "index": 1,
+      "shape": "cylinder",
+      "color": "green",
+      "filename": "01_green_cylinder.jpg"
+    },
+    {
+      "index": 2,
+      "shape": "circle",
+      "color": "pink",
+      "filename": "02_pink_circle.jpg"
+    },
+    {
+      "index": 3,
+      "shape": "rectangle",
+      "color": "green",
+      "filename": "03_green_rectangle.jpg"
+    },
+    {
+      "index": 4,
+      "shape": "square",
+      "color": "blue",
+      "filename": "04_blue_square.jpg"
+    },
+    {
+      "index": 5,
+      "shape": "cylinder",
+      "color": "white",
+      "filename": "05_white_cylinder.jpg"
+    },
+    {
+      "index": 6,
+      "shape": "cylinder",
+      "color": "orange",
+      "filename": "06_orange_cylinder.jpg"
+    },
+    {
+      "index": 7,
+      "shape": "rectangle",
+      "color": "purple",
+      "filename": "07_purple_rectangle.jpg"
+    },
+    {
+      "index": 8,
+      "shape": "rectangle",
+      "color": "red",
+      "filename": "08_red_rectangle.jpg"
+    },
+    {
+      "index": 9,
+      "shape": "cylinder",
+      "color": "black",
+      "filename": "09_black_cylinder.jpg"
+    },
+    {
+      "index": 10,
+      "shape": "cylinder",
+      "color": "pink",
+      "filename": "10_pink_cylinder.jpg"
+    },
+    {
+      "index": 11,
+      "shape": "square",
+      "color": "purple",
+      "filename": "11_purple_square.jpg"
+    },
+    {
+      "index": 12,
+      "shape": "triangle",
+      "color": "brown",
+      "filename": "12_brown_triangle.jpg"
+    },
+    {
+      "index": 13,
+      "shape": "rectangle",
+      "color": "blue",
+      "filename": "13_blue_rectangle.jpg"
+    },
+    {
+      "index": 14,
+      "shape": "circle",
+      "color": "orange",
+      "filename": "14_orange_circle.jpg"
+    }
+  ],
+  "media_mode": "local_path",
+  "status": "wrong",
+  "error_type": "wrong_answer",
+  "raw_prediction": "11",
+  "extracted_prediction": "11",
+  "strict_raw_ok": false,
+  "latency_sec": 2.389,
+  "finish_reason": "stop"
+}

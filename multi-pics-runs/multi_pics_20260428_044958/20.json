@@ -1,0 +1,143 @@
+{
+  "case_id": "20",
+  "image_count": 20,
+  "question_type": "index",
+  "question": "Which image is the blue cube? Answer only one number.",
+  "gold_answer": "9",
+  "target": {
+    "index": 9,
+    "shape": "cube",
+    "color": "blue",
+    "filename": "09_blue_cube.jpg"
+  },
+  "images": [
+    {
+      "index": 1,
+      "shape": "rhombus",
+      "color": "orange",
+      "filename": "01_orange_rhombus.jpg"
+    },
+    {
+      "index": 2,
+      "shape": "cone",
+      "color": "green",
+      "filename": "02_green_cone.jpg"
+    },
+    {
+      "index": 3,
+      "shape": "rectangle",
+      "color": "blue",
+      "filename": "03_blue_rectangle.jpg"
+    },
+    {
+      "index": 4,
+      "shape": "circle",
+      "color": "red",
+      "filename": "04_red_circle.jpg"
+    },
+    {
+      "index": 5,
+      "shape": "square",
+      "color": "green",
+      "filename": "05_green_square.jpg"
+    },
+    {
+      "index": 6,
+      "shape": "circle",
+      "color": "yellow",
+      "filename": "06_yellow_circle.jpg"
+    },
+    {
+      "index": 7,
+      "shape": "rhombus",
+      "color": "red",
+      "filename": "07_red_rhombus.jpg"
+    },
+    {
+      "index": 8,
+      "shape": "cube",
+      "color": "orange",
+      "filename": "08_orange_cube.jpg"
+    },
+    {
+      "index": 9,
+      "shape": "cube",
+      "color": "blue",
+      "filename": "09_blue_cube.jpg"
+    },
+    {
+      "index": 10,
+      "shape": "triangle",
+      "color": "green",
+      "filename": "10_green_triangle.jpg"
+    },
+    {
+      "index": 11,
+      "shape": "cone",
+      "color": "brown",
+      "filename": "11_brown_cone.jpg"
+    },
+    {
+      "index": 12,
+      "shape": "square",
+      "color": "purple",
+      "filename": "12_purple_square.jpg"
+    },
+    {
+      "index": 13,
+      "shape": "circle",
+      "color": "pink",
+      "filename": "13_pink_circle.jpg"
+    },
+    {
+      "index": 14,
+      "shape": "cylinder",
+      "color": "orange",
+      "filename": "14_orange_cylinder.jpg"
+    },
+    {
+      "index": 15,
+      "shape": "cylinder",
+      "color": "brown",
+      "filename": "15_brown_cylinder.jpg"
+    },
+    {
+      "index": 16,
+      "shape": "cube",
+      "color": "brown",
+      "filename": "16_brown_cube.jpg"
+    },
+    {
+      "index": 17,
+      "shape": "circle",
+      "color": "blue",
+      "filename": "17_blue_circle.jpg"
+    },
+    {
+      "index": 18,
+      "shape": "cube",
+      "color": "purple",
+      "filename": "18_purple_cube.jpg"
+    },
+    {
+      "index": 19,
+      "shape": "square",
+      "color": "blue",
+      "filename": "19_blue_square.jpg"
+    },
+    {
+      "index": 20,
+      "shape": "cylinder",
+      "color": "green",
+      "filename": "20_green_cylinder.jpg"
+    }
+  ],
+  "media_mode": "local_path",
+  "status": "correct",
+  "error_type": "ok",
+  "raw_prediction": "9",
+  "extracted_prediction": "9",
+  "strict_raw_ok": true,
+  "latency_sec": 2.523,
+  "finish_reason": "stop"
+}

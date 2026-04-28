@@ -1,0 +1,65 @@
+{
+  "case_id": "07",
+  "image_count": 7,
+  "question_type": "index",
+  "question": "Which image is the orange rhombus? Answer only one number.",
+  "gold_answer": "1",
+  "target": {
+    "index": 1,
+    "shape": "rhombus",
+    "color": "orange",
+    "filename": "01_orange_rhombus.jpg"
+  },
+  "images": [
+    {
+      "index": 1,
+      "shape": "rhombus",
+      "color": "orange",
+      "filename": "01_orange_rhombus.jpg"
+    },
+    {
+      "index": 2,
+      "shape": "cone",
+      "color": "orange",
+      "filename": "02_orange_cone.jpg"
+    },
+    {
+      "index": 3,
+      "shape": "rectangle",
+      "color": "black",
+      "filename": "03_black_rectangle.jpg"
+    },
+    {
+      "index": 4,
+      "shape": "cone",
+      "color": "brown",
+      "filename": "04_brown_cone.jpg"
+    },
+    {
+      "index": 5,
+      "shape": "triangle",
+      "color": "red",
+      "filename": "05_red_triangle.jpg"
+    },
+    {
+      "index": 6,
+      "shape": "triangle",
+      "color": "orange",
+      "filename": "06_orange_triangle.jpg"
+    },
+    {
+      "index": 7,
+      "shape": "rhombus",
+      "color": "white",
+      "filename": "07_white_rhombus.jpg"
+    }
+  ],
+  "media_mode": "local_path",
+  "status": "correct",
+  "error_type": "ok",
+  "raw_prediction": "1",
+  "extracted_prediction": "1",
+  "strict_raw_ok": true,
+  "latency_sec": 1.426,
+  "finish_reason": "stop"
+}

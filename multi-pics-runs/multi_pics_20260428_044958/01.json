@@ -1,0 +1,29 @@
+{
+  "case_id": "01",
+  "image_count": 1,
+  "question_type": "yes_no",
+  "question": "Is this a blue rhombus? Answer only one word: YES or NO.",
+  "gold_answer": "YES",
+  "target": {
+    "index": 1,
+    "shape": "rhombus",
+    "color": "blue",
+    "filename": "01_blue_rhombus.jpg"
+  },
+  "images": [
+    {
+      "index": 1,
+      "shape": "rhombus",
+      "color": "blue",
+      "filename": "01_blue_rhombus.jpg"
+    }
+  ],
+  "media_mode": "local_path",
+  "status": "correct",
+  "error_type": "ok",
+  "raw_prediction": "YES",
+  "extracted_prediction": "YES",
+  "strict_raw_ok": true,
+  "latency_sec": 0.61,
+  "finish_reason": "stop"
+}

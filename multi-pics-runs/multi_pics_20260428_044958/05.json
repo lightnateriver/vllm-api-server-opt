@@ -1,0 +1,53 @@
+{
+  "case_id": "05",
+  "image_count": 5,
+  "question_type": "index",
+  "question": "Which image is the brown cube? Answer only one number.",
+  "gold_answer": "4",
+  "target": {
+    "index": 4,
+    "shape": "cube",
+    "color": "brown",
+    "filename": "04_brown_cube.jpg"
+  },
+  "images": [
+    {
+      "index": 1,
+      "shape": "square",
+      "color": "purple",
+      "filename": "01_purple_square.jpg"
+    },
+    {
+      "index": 2,
+      "shape": "cube",
+      "color": "pink",
+      "filename": "02_pink_cube.jpg"
+    },
+    {
+      "index": 3,
+      "shape": "rhombus",
+      "color": "purple",
+      "filename": "03_purple_rhombus.jpg"
+    },
+    {
+      "index": 4,
+      "shape": "cube",
+      "color": "brown",
+      "filename": "04_brown_cube.jpg"
+    },
+    {
+      "index": 5,
+      "shape": "rectangle",
+      "color": "red",
+      "filename": "05_red_rectangle.jpg"
+    }
+  ],
+  "media_mode": "local_path",
+  "status": "correct",
+  "error_type": "ok",
+  "raw_prediction": "4",
+  "extracted_prediction": "4",
+  "strict_raw_ok": true,
+  "latency_sec": 0.869,
+  "finish_reason": "stop"
+}

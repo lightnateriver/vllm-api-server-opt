@@ -1,0 +1,179 @@
+{
+  "case_id": "26",
+  "image_count": 26,
+  "question_type": "index",
+  "question": "Which image is the pink rectangle? Answer only one number.",
+  "gold_answer": "21",
+  "target": {
+    "index": 21,
+    "shape": "rectangle",
+    "color": "pink",
+    "filename": "21_pink_rectangle.jpg"
+  },
+  "images": [
+    {
+      "index": 1,
+      "shape": "rectangle",
+      "color": "white",
+      "filename": "01_white_rectangle.jpg"
+    },
+    {
+      "index": 2,
+      "shape": "circle",
+      "color": "green",
+      "filename": "02_green_circle.jpg"
+    },
+    {
+      "index": 3,
+      "shape": "circle",
+      "color": "orange",
+      "filename": "03_orange_circle.jpg"
+    },
+    {
+      "index": 4,
+      "shape": "cylinder",
+      "color": "black",
+      "filename": "04_black_cylinder.jpg"
+    },
+    {
+      "index": 5,
+      "shape": "rhombus",
+      "color": "pink",
+      "filename": "05_pink_rhombus.jpg"
+    },
+    {
+      "index": 6,
+      "shape": "cube",
+      "color": "purple",
+      "filename": "06_purple_cube.jpg"
+    },
+    {
+      "index": 7,
+      "shape": "circle",
+      "color": "pink",
+      "filename": "07_pink_circle.jpg"
+    },
+    {
+      "index": 8,
+      "shape": "rectangle",
+      "color": "blue",
+      "filename": "08_blue_rectangle.jpg"
+    },
+    {
+      "index": 9,
+      "shape": "cone",
+      "color": "white",
+      "filename": "09_white_cone.jpg"
+    },
+    {
+      "index": 10,
+      "shape": "circle",
+      "color": "purple",
+      "filename": "10_purple_circle.jpg"
+    },
+    {
+      "index": 11,
+      "shape": "triangle",
+      "color": "yellow",
+      "filename": "11_yellow_triangle.jpg"
+    },
+    {
+      "index": 12,
+      "shape": "rectangle",
+      "color": "brown",
+      "filename": "12_brown_rectangle.jpg"
+    },
+    {
+      "index": 13,
+      "shape": "cylinder",
+      "color": "blue",
+      "filename": "13_blue_cylinder.jpg"
+    },
+    {
+      "index": 14,
+      "shape": "triangle",
+      "color": "white",
+      "filename": "14_white_triangle.jpg"
+    },
+    {
+      "index": 15,
+      "shape": "circle",
+      "color": "red",
+      "filename": "15_red_circle.jpg"
+    },
+    {
+      "index": 16,
+      "shape": "cone",
+      "color": "yellow",
+      "filename": "16_yellow_cone.jpg"
+    },
+    {
+      "index": 17,
+      "shape": "rectangle",
+      "color": "black",
+      "filename": "17_black_rectangle.jpg"
+    },
+    {
+      "index": 18,
+      "shape": "cube",
+      "color": "green",
+      "filename": "18_green_cube.jpg"
+    },
+    {
+      "index": 19,
+      "shape": "cone",
+      "color": "orange",
+      "filename": "19_orange_cone.jpg"
+    },
+    {
+      "index": 20,
+      "shape": "rectangle",
+      "color": "red",
+      "filename": "20_red_rectangle.jpg"
+    },
+    {
+      "index": 21,
+      "shape": "rectangle",
+      "color": "pink",
+      "filename": "21_pink_rectangle.jpg"
+    },
+    {
+      "index": 22,
+      "shape": "square",
+      "color": "pink",
+      "filename": "22_pink_square.jpg"
+    },
+    {
+      "index": 23,
+      "shape": "rhombus",
+      "color": "black",
+      "filename": "23_black_rhombus.jpg"
+    },
+    {
+      "index": 24,
+      "shape": "rhombus",
+      "color": "red",
+      "filename": "24_red_rhombus.jpg"
+    },
+    {
+      "index": 25,
+      "shape": "cube",
+      "color": "blue",
+      "filename": "25_blue_cube.jpg"
+    },
+    {
+      "index": 26,
+      "shape": "circle",
+      "color": "white",
+      "filename": "26_white_circle.jpg"
+    }
+  ],
+  "media_mode": "local_path",
+  "status": "wrong",
+  "error_type": "wrong_answer",
+  "raw_prediction": "20",
+  "extracted_prediction": "20",
+  "strict_raw_ok": false,
+  "latency_sec": 3.329,
+  "finish_reason": "stop"
+}

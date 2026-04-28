@@ -1,0 +1,125 @@
+{
+  "case_id": "17",
+  "image_count": 17,
+  "question_type": "index",
+  "question": "Which image is the green triangle? Answer only one number.",
+  "gold_answer": "7",
+  "target": {
+    "index": 7,
+    "shape": "triangle",
+    "color": "green",
+    "filename": "07_green_triangle.jpg"
+  },
+  "images": [
+    {
+      "index": 1,
+      "shape": "rhombus",
+      "color": "pink",
+      "filename": "01_pink_rhombus.jpg"
+    },
+    {
+      "index": 2,
+      "shape": "cylinder",
+      "color": "pink",
+      "filename": "02_pink_cylinder.jpg"
+    },
+    {
+      "index": 3,
+      "shape": "rhombus",
+      "color": "yellow",
+      "filename": "03_yellow_rhombus.jpg"
+    },
+    {
+      "index": 4,
+      "shape": "square",
+      "color": "brown",
+      "filename": "04_brown_square.jpg"
+    },
+    {
+      "index": 5,
+      "shape": "rectangle",
+      "color": "white",
+      "filename": "05_white_rectangle.jpg"
+    },
+    {
+      "index": 6,
+      "shape": "triangle",
+      "color": "orange",
+      "filename": "06_orange_triangle.jpg"
+    },
+    {
+      "index": 7,
+      "shape": "triangle",
+      "color": "green",
+      "filename": "07_green_triangle.jpg"
+    },
+    {
+      "index": 8,
+      "shape": "cylinder",
+      "color": "green",
+      "filename": "08_green_cylinder.jpg"
+    },
+    {
+      "index": 9,
+      "shape": "rhombus",
+      "color": "blue",
+      "filename": "09_blue_rhombus.jpg"
+    },
+    {
+      "index": 10,
+      "shape": "square",
+      "color": "yellow",
+      "filename": "10_yellow_square.jpg"
+    },
+    {
+      "index": 11,
+      "shape": "circle",
+      "color": "yellow",
+      "filename": "11_yellow_circle.jpg"
+    },
+    {
+      "index": 12,
+      "shape": "cone",
+      "color": "green",
+      "filename": "12_green_cone.jpg"
+    },
+    {
+      "index": 13,
+      "shape": "cube",
+      "color": "white",
+      "filename": "13_white_cube.jpg"
+    },
+    {
+      "index": 14,
+      "shape": "cube",
+      "color": "green",
+      "filename": "14_green_cube.jpg"
+    },
+    {
+      "index": 15,
+      "shape": "circle",
+      "color": "green",
+      "filename": "15_green_circle.jpg"
+    },
+    {
+      "index": 16,
+      "shape": "triangle",
+      "color": "purple",
+      "filename": "16_purple_triangle.jpg"
+    },
+    {
+      "index": 17,
+      "shape": "cone",
+      "color": "blue",
+      "filename": "17_blue_cone.jpg"
+    }
+  ],
+  "media_mode": "local_path",
+  "status": "correct",
+  "error_type": "ok",
+  "raw_prediction": "7",
+  "extracted_prediction": "7",
+  "strict_raw_ok": true,
+  "latency_sec": 2.147,
+  "finish_reason": "stop"
+}

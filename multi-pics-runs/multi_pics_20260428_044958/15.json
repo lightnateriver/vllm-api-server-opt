@@ -1,0 +1,113 @@
+{
+  "case_id": "15",
+  "image_count": 15,
+  "question_type": "index",
+  "question": "Which image is the brown rhombus? Answer only one number.",
+  "gold_answer": "15",
+  "target": {
+    "index": 15,
+    "shape": "rhombus",
+    "color": "brown",
+    "filename": "15_brown_rhombus.jpg"
+  },
+  "images": [
+    {
+      "index": 1,
+      "shape": "triangle",
+      "color": "red",
+      "filename": "01_red_triangle.jpg"
+    },
+    {
+      "index": 2,
+      "shape": "rectangle",
+      "color": "blue",
+      "filename": "02_blue_rectangle.jpg"
+    },
+    {
+      "index": 3,
+      "shape": "cylinder",
+      "color": "pink",
+      "filename": "03_pink_cylinder.jpg"
+    },
+    {
+      "index": 4,
+      "shape": "cone",
+      "color": "brown",
+      "filename": "04_brown_cone.jpg"
+    },
+    {
+      "index": 5,
+      "shape": "circle",
+      "color": "pink",
+      "filename": "05_pink_circle.jpg"
+    },
+    {
+      "index": 6,
+      "shape": "cylinder",
+      "color": "green",
+      "filename": "06_green_cylinder.jpg"
+    },
+    {
+      "index": 7,
+      "shape": "rhombus",
+      "color": "black",
+      "filename": "07_black_rhombus.jpg"
+    },
+    {
+      "index": 8,
+      "shape": "cone",
+      "color": "white",
+      "filename": "08_white_cone.jpg"
+    },
+    {
+      "index": 9,
+      "shape": "cylinder",
+      "color": "yellow",
+      "filename": "09_yellow_cylinder.jpg"
+    },
+    {
+      "index": 10,
+      "shape": "rhombus",
+      "color": "green",
+      "filename": "10_green_rhombus.jpg"
+    },
+    {
+      "index": 11,
+      "shape": "circle",
+      "color": "orange",
+      "filename": "11_orange_circle.jpg"
+    },
+    {
+      "index": 12,
+      "shape": "cube",
+      "color": "pink",
+      "filename": "12_pink_cube.jpg"
+    },
+    {
+      "index": 13,
+      "shape": "triangle",
+      "color": "orange",
+      "filename": "13_orange_triangle.jpg"
+    },
+    {
+      "index": 14,
+      "shape": "cone",
+      "color": "blue",
+      "filename": "14_blue_cone.jpg"
+    },
+    {
+      "index": 15,
+      "shape": "rhombus",
+      "color": "brown",
+      "filename": "15_brown_rhombus.jpg"
+    }
+  ],
+  "media_mode": "local_path",
+  "status": "wrong",
+  "error_type": "wrong_answer",
+  "raw_prediction": "14",
+  "extracted_prediction": "14",
+  "strict_raw_ok": false,
+  "latency_sec": 2.339,
+  "finish_reason": "stop"
+}

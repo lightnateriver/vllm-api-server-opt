@@ -1,0 +1,89 @@
+{
+  "case_id": "11",
+  "image_count": 11,
+  "question_type": "index",
+  "question": "Which image is the black square? Answer only one number.",
+  "gold_answer": "11",
+  "target": {
+    "index": 11,
+    "shape": "square",
+    "color": "black",
+    "filename": "11_black_square.jpg"
+  },
+  "images": [
+    {
+      "index": 1,
+      "shape": "cone",
+      "color": "green",
+      "filename": "01_green_cone.jpg"
+    },
+    {
+      "index": 2,
+      "shape": "square",
+      "color": "pink",
+      "filename": "02_pink_square.jpg"
+    },
+    {
+      "index": 3,
+      "shape": "triangle",
+      "color": "black",
+      "filename": "03_black_triangle.jpg"
+    },
+    {
+      "index": 4,
+      "shape": "rhombus",
+      "color": "blue",
+      "filename": "04_blue_rhombus.jpg"
+    },
+    {
+      "index": 5,
+      "shape": "rectangle",
+      "color": "brown",
+      "filename": "05_brown_rectangle.jpg"
+    },
+    {
+      "index": 6,
+      "shape": "cone",
+      "color": "brown",
+      "filename": "06_brown_cone.jpg"
+    },
+    {
+      "index": 7,
+      "shape": "rectangle",
+      "color": "pink",
+      "filename": "07_pink_rectangle.jpg"
+    },
+    {
+      "index": 8,
+      "shape": "rectangle",
+      "color": "black",
+      "filename": "08_black_rectangle.jpg"
+    },
+    {
+      "index": 9,
+      "shape": "triangle",
+      "color": "purple",
+      "filename": "09_purple_triangle.jpg"
+    },
+    {
+      "index": 10,
+      "shape": "triangle",
+      "color": "yellow",
+      "filename": "10_yellow_triangle.jpg"
+    },
+    {
+      "index": 11,
+      "shape": "square",
+      "color": "black",
+      "filename": "11_black_square.jpg"
+    }
+  ],
+  "media_mode": "local_path",
+  "status": "correct",
+  "error_type": "ok",
+  "raw_prediction": "11",
+  "extracted_prediction": "11",
+  "strict_raw_ok": true,
+  "latency_sec": 2.353,
+  "finish_reason": "stop"
+}

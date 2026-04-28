@@ -1,0 +1,197 @@
+{
+  "case_id": "29",
+  "image_count": 29,
+  "question_type": "index",
+  "question": "Which image is the pink rhombus? Answer only one number.",
+  "gold_answer": "24",
+  "target": {
+    "index": 24,
+    "shape": "rhombus",
+    "color": "pink",
+    "filename": "24_pink_rhombus.jpg"
+  },
+  "images": [
+    {
+      "index": 1,
+      "shape": "cylinder",
+      "color": "purple",
+      "filename": "01_purple_cylinder.jpg"
+    },
+    {
+      "index": 2,
+      "shape": "square",
+      "color": "pink",
+      "filename": "02_pink_square.jpg"
+    },
+    {
+      "index": 3,
+      "shape": "rhombus",
+      "color": "blue",
+      "filename": "03_blue_rhombus.jpg"
+    },
+    {
+      "index": 4,
+      "shape": "rhombus",
+      "color": "brown",
+      "filename": "04_brown_rhombus.jpg"
+    },
+    {
+      "index": 5,
+      "shape": "cone",
+      "color": "brown",
+      "filename": "05_brown_cone.jpg"
+    },
+    {
+      "index": 6,
+      "shape": "square",
+      "color": "white",
+      "filename": "06_white_square.jpg"
+    },
+    {
+      "index": 7,
+      "shape": "circle",
+      "color": "pink",
+      "filename": "07_pink_circle.jpg"
+    },
+    {
+      "index": 8,
+      "shape": "triangle",
+      "color": "blue",
+      "filename": "08_blue_triangle.jpg"
+    },
+    {
+      "index": 9,
+      "shape": "rectangle",
+      "color": "white",
+      "filename": "09_white_rectangle.jpg"
+    },
+    {
+      "index": 10,
+      "shape": "rectangle",
+      "color": "brown",
+      "filename": "10_brown_rectangle.jpg"
+    },
+    {
+      "index": 11,
+      "shape": "cube",
+      "color": "black",
+      "filename": "11_black_cube.jpg"
+    },
+    {
+      "index": 12,
+      "shape": "cylinder",
+      "color": "white",
+      "filename": "12_white_cylinder.jpg"
+    },
+    {
+      "index": 13,
+      "shape": "cone",
+      "color": "green",
+      "filename": "13_green_cone.jpg"
+    },
+    {
+      "index": 14,
+      "shape": "triangle",
+      "color": "black",
+      "filename": "14_black_triangle.jpg"
+    },
+    {
+      "index": 15,
+      "shape": "cube",
+      "color": "green",
+      "filename": "15_green_cube.jpg"
+    },
+    {
+      "index": 16,
+      "shape": "rhombus",
+      "color": "yellow",
+      "filename": "16_yellow_rhombus.jpg"
+    },
+    {
+      "index": 17,
+      "shape": "square",
+      "color": "red",
+      "filename": "17_red_square.jpg"
+    },
+    {
+      "index": 18,
+      "shape": "rectangle",
+      "color": "purple",
+      "filename": "18_purple_rectangle.jpg"
+    },
+    {
+      "index": 19,
+      "shape": "rectangle",
+      "color": "green",
+      "filename": "19_green_rectangle.jpg"
+    },
+    {
+      "index": 20,
+      "shape": "triangle",
+      "color": "pink",
+      "filename": "20_pink_triangle.jpg"
+    },
+    {
+      "index": 21,
+      "shape": "triangle",
+      "color": "white",
+      "filename": "21_white_triangle.jpg"
+    },
+    {
+      "index": 22,
+      "shape": "triangle",
+      "color": "red",
+      "filename": "22_red_triangle.jpg"
+    },
+    {
+      "index": 23,
+      "shape": "cylinder",
+      "color": "yellow",
+      "filename": "23_yellow_cylinder.jpg"
+    },
+    {
+      "index": 24,
+      "shape": "rhombus",
+      "color": "pink",
+      "filename": "24_pink_rhombus.jpg"
+    },
+    {
+      "index": 25,
+      "shape": "square",
+      "color": "yellow",
+      "filename": "25_yellow_square.jpg"
+    },
+    {
+      "index": 26,
+      "shape": "cube",
+      "color": "yellow",
+      "filename": "26_yellow_cube.jpg"
+    },
+    {
+      "index": 27,
+      "shape": "rhombus",
+      "color": "green",
+      "filename": "27_green_rhombus.jpg"
+    },
+    {
+      "index": 28,
+      "shape": "cylinder",
+      "color": "orange",
+      "filename": "28_orange_cylinder.jpg"
+    },
+    {
+      "index": 29,
+      "shape": "rhombus",
+      "color": "white",
+      "filename": "29_white_rhombus.jpg"
+    }
+  ],
+  "media_mode": "local_path",
+  "status": "wrong",
+  "error_type": "wrong_answer",
+  "raw_prediction": "21",
+  "extracted_prediction": "21",
+  "strict_raw_ok": false,
+  "latency_sec": 3.652,
+  "finish_reason": "stop"
+}

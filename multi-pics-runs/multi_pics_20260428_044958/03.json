@@ -1,0 +1,41 @@
+{
+  "case_id": "03",
+  "image_count": 3,
+  "question_type": "index",
+  "question": "Which image is the orange rhombus? Answer only one number.",
+  "gold_answer": "1",
+  "target": {
+    "index": 1,
+    "shape": "rhombus",
+    "color": "orange",
+    "filename": "01_orange_rhombus.jpg"
+  },
+  "images": [
+    {
+      "index": 1,
+      "shape": "rhombus",
+      "color": "orange",
+      "filename": "01_orange_rhombus.jpg"
+    },
+    {
+      "index": 2,
+      "shape": "square",
+      "color": "blue",
+      "filename": "02_blue_square.jpg"
+    },
+    {
+      "index": 3,
+      "shape": "circle",
+      "color": "blue",
+      "filename": "03_blue_circle.jpg"
+    }
+  ],
+  "media_mode": "local_path",
+  "status": "correct",
+  "error_type": "ok",
+  "raw_prediction": "1",
+  "extracted_prediction": "1",
+  "strict_raw_ok": true,
+  "latency_sec": 0.616,
+  "finish_reason": "stop"
+}

@@ -1,0 +1,59 @@
+{
+  "case_id": "06",
+  "image_count": 6,
+  "question_type": "index",
+  "question": "Which image is the white square? Answer only one number.",
+  "gold_answer": "3",
+  "target": {
+    "index": 3,
+    "shape": "square",
+    "color": "white",
+    "filename": "03_white_square.jpg"
+  },
+  "images": [
+    {
+      "index": 1,
+      "shape": "triangle",
+      "color": "green",
+      "filename": "01_green_triangle.jpg"
+    },
+    {
+      "index": 2,
+      "shape": "square",
+      "color": "blue",
+      "filename": "02_blue_square.jpg"
+    },
+    {
+      "index": 3,
+      "shape": "square",
+      "color": "white",
+      "filename": "03_white_square.jpg"
+    },
+    {
+      "index": 4,
+      "shape": "cube",
+      "color": "red",
+      "filename": "04_red_cube.jpg"
+    },
+    {
+      "index": 5,
+      "shape": "triangle",
+      "color": "red",
+      "filename": "05_red_triangle.jpg"
+    },
+    {
+      "index": 6,
+      "shape": "cylinder",
+      "color": "green",
+      "filename": "06_green_cylinder.jpg"
+    }
+  ],
+  "media_mode": "local_path",
+  "status": "correct",
+  "error_type": "ok",
+  "raw_prediction": "3",
+  "extracted_prediction": "3",
+  "strict_raw_ok": true,
+  "latency_sec": 1.148,
+  "finish_reason": "stop"
+}

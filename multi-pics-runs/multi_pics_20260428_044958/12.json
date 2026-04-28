@@ -1,0 +1,95 @@
+{
+  "case_id": "12",
+  "image_count": 12,
+  "question_type": "index",
+  "question": "Which image is the blue circle? Answer only one number.",
+  "gold_answer": "7",
+  "target": {
+    "index": 7,
+    "shape": "circle",
+    "color": "blue",
+    "filename": "07_blue_circle.jpg"
+  },
+  "images": [
+    {
+      "index": 1,
+      "shape": "cone",
+      "color": "blue",
+      "filename": "01_blue_cone.jpg"
+    },
+    {
+      "index": 2,
+      "shape": "rhombus",
+      "color": "blue",
+      "filename": "02_blue_rhombus.jpg"
+    },
+    {
+      "index": 3,
+      "shape": "rectangle",
+      "color": "green",
+      "filename": "03_green_rectangle.jpg"
+    },
+    {
+      "index": 4,
+      "shape": "cube",
+      "color": "white",
+      "filename": "04_white_cube.jpg"
+    },
+    {
+      "index": 5,
+      "shape": "triangle",
+      "color": "purple",
+      "filename": "05_purple_triangle.jpg"
+    },
+    {
+      "index": 6,
+      "shape": "rectangle",
+      "color": "purple",
+      "filename": "06_purple_rectangle.jpg"
+    },
+    {
+      "index": 7,
+      "shape": "circle",
+      "color": "blue",
+      "filename": "07_blue_circle.jpg"
+    },
+    {
+      "index": 8,
+      "shape": "rectangle",
+      "color": "brown",
+      "filename": "08_brown_rectangle.jpg"
+    },
+    {
+      "index": 9,
+      "shape": "rectangle",
+      "color": "white",
+      "filename": "09_white_rectangle.jpg"
+    },
+    {
+      "index": 10,
+      "shape": "circle",
+      "color": "pink",
+      "filename": "10_pink_circle.jpg"
+    },
+    {
+      "index": 11,
+      "shape": "rhombus",
+      "color": "yellow",
+      "filename": "11_yellow_rhombus.jpg"
+    },
+    {
+      "index": 12,
+      "shape": "cube",
+      "color": "purple",
+      "filename": "12_purple_cube.jpg"
+    }
+  ],
+  "media_mode": "local_path",
+  "status": "correct",
+  "error_type": "ok",
+  "raw_prediction": "7",
+  "extracted_prediction": "7",
+  "strict_raw_ok": true,
+  "latency_sec": 2.35,
+  "finish_reason": "stop"
+}

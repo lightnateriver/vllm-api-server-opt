@@ -1,0 +1,77 @@
+{
+  "case_id": "09",
+  "image_count": 9,
+  "question_type": "index",
+  "question": "Which image is the red rhombus? Answer only one number.",
+  "gold_answer": "1",
+  "target": {
+    "index": 1,
+    "shape": "rhombus",
+    "color": "red",
+    "filename": "01_red_rhombus.jpg"
+  },
+  "images": [
+    {
+      "index": 1,
+      "shape": "rhombus",
+      "color": "red",
+      "filename": "01_red_rhombus.jpg"
+    },
+    {
+      "index": 2,
+      "shape": "cone",
+      "color": "purple",
+      "filename": "02_purple_cone.jpg"
+    },
+    {
+      "index": 3,
+      "shape": "rectangle",
+      "color": "yellow",
+      "filename": "03_yellow_rectangle.jpg"
+    },
+    {
+      "index": 4,
+      "shape": "triangle",
+      "color": "blue",
+      "filename": "04_blue_triangle.jpg"
+    },
+    {
+      "index": 5,
+      "shape": "triangle",
+      "color": "red",
+      "filename": "05_red_triangle.jpg"
+    },
+    {
+      "index": 6,
+      "shape": "triangle",
+      "color": "yellow",
+      "filename": "06_yellow_triangle.jpg"
+    },
+    {
+      "index": 7,
+      "shape": "cylinder",
+      "color": "green",
+      "filename": "07_green_cylinder.jpg"
+    },
+    {
+      "index": 8,
+      "shape": "square",
+      "color": "brown",
+      "filename": "08_brown_square.jpg"
+    },
+    {
+      "index": 9,
+      "shape": "rectangle",
+      "color": "brown",
+      "filename": "09_brown_rectangle.jpg"
+    }
+  ],
+  "media_mode": "local_path",
+  "status": "correct",
+  "error_type": "ok",
+  "raw_prediction": "1",
+  "extracted_prediction": "1",
+  "strict_raw_ok": true,
+  "latency_sec": 1.588,
+  "finish_reason": "stop"
+}

@@ -1,0 +1,101 @@
+{
+  "case_id": "13",
+  "image_count": 13,
+  "question_type": "index",
+  "question": "Which image is the yellow cone? Answer only one number.",
+  "gold_answer": "13",
+  "target": {
+    "index": 13,
+    "shape": "cone",
+    "color": "yellow",
+    "filename": "13_yellow_cone.jpg"
+  },
+  "images": [
+    {
+      "index": 1,
+      "shape": "triangle",
+      "color": "yellow",
+      "filename": "01_yellow_triangle.jpg"
+    },
+    {
+      "index": 2,
+      "shape": "square",
+      "color": "red",
+      "filename": "02_red_square.jpg"
+    },
+    {
+      "index": 3,
+      "shape": "square",
+      "color": "yellow",
+      "filename": "03_yellow_square.jpg"
+    },
+    {
+      "index": 4,
+      "shape": "rectangle",
+      "color": "orange",
+      "filename": "04_orange_rectangle.jpg"
+    },
+    {
+      "index": 5,
+      "shape": "circle",
+      "color": "orange",
+      "filename": "05_orange_circle.jpg"
+    },
+    {
+      "index": 6,
+      "shape": "rectangle",
+      "color": "blue",
+      "filename": "06_blue_rectangle.jpg"
+    },
+    {
+      "index": 7,
+      "shape": "cylinder",
+      "color": "orange",
+      "filename": "07_orange_cylinder.jpg"
+    },
+    {
+      "index": 8,
+      "shape": "triangle",
+      "color": "black",
+      "filename": "08_black_triangle.jpg"
+    },
+    {
+      "index": 9,
+      "shape": "cube",
+      "color": "yellow",
+      "filename": "09_yellow_cube.jpg"
+    },
+    {
+      "index": 10,
+      "shape": "triangle",
+      "color": "blue",
+      "filename": "10_blue_triangle.jpg"
+    },
+    {
+      "index": 11,
+      "shape": "cone",
+      "color": "pink",
+      "filename": "11_pink_cone.jpg"
+    },
+    {
+      "index": 12,
+      "shape": "circle",
+      "color": "brown",
+      "filename": "12_brown_circle.jpg"
+    },
+    {
+      "index": 13,
+      "shape": "cone",
+      "color": "yellow",
+      "filename": "13_yellow_cone.jpg"
+    }
+  ],
+  "media_mode": "local_path",
+  "status": "wrong",
+  "error_type": "wrong_answer",
+  "raw_prediction": "12",
+  "extracted_prediction": "12",
+  "strict_raw_ok": false,
+  "latency_sec": 2.364,
+  "finish_reason": "stop"
+}

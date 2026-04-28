@@ -1,0 +1,47 @@
+{
+  "case_id": "04",
+  "image_count": 4,
+  "question_type": "index",
+  "question": "Which image is the yellow cylinder? Answer only one number.",
+  "gold_answer": "3",
+  "target": {
+    "index": 3,
+    "shape": "cylinder",
+    "color": "yellow",
+    "filename": "03_yellow_cylinder.jpg"
+  },
+  "images": [
+    {
+      "index": 1,
+      "shape": "cube",
+      "color": "purple",
+      "filename": "01_purple_cube.jpg"
+    },
+    {
+      "index": 2,
+      "shape": "triangle",
+      "color": "blue",
+      "filename": "02_blue_triangle.jpg"
+    },
+    {
+      "index": 3,
+      "shape": "cylinder",
+      "color": "yellow",
+      "filename": "03_yellow_cylinder.jpg"
+    },
+    {
+      "index": 4,
+      "shape": "square",
+      "color": "blue",
+      "filename": "04_blue_square.jpg"
+    }
+  ],
+  "media_mode": "local_path",
+  "status": "correct",
+  "error_type": "ok",
+  "raw_prediction": "3",
+  "extracted_prediction": "3",
+  "strict_raw_ok": true,
+  "latency_sec": 0.939,
+  "finish_reason": "stop"
+}

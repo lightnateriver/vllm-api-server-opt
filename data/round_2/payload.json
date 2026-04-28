@@ -1,0 +1,260 @@
+{
+  "model": "/mnt/sfs_turbo/models/Qwen3.5-4B",
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "Segment r02_s00000 records a granular benchmark for performance tracing. It includes identifiers 2/0/2000 and unique markers R02_S00000::2. This line is intentionally unique within and across rounds.\nSegment r02_s00001 records a deterministic profile for performance tracing. It includes identifiers 2/1/2001 and unique markers R02_S00001::19. This line is intentionally unique within and across rounds.\nSegment r02_s00002 records a cacheless session for performance tracing. It includes identifiers 2/2/2002 and unique markers R02_S00002::36. This line is intentionally unique within and across rounds.\nSegment r02_s00003 records a multimodal request for performance tracing. It includes identifiers 2/3/2003 and unique markers R02_S00003::53. This line is intentionally unique within and across rounds.\nSegment r02_s00004 records a latency-aware timeline for performance tracing. It includes identifiers 2/4/2004 and unique markers R02_S00004::70. This line is intentionally unique within and across rounds.\nSegment r02_s00005 records a token-precise sample for performance tracing. It includes identifiers 2/5/2005 and unique markers R02_S00005::87. This line is intentionally unique within and across rounds.\nSegment r02_s00006 records a vision-heavy payload for performance tracing. It includes identifiers 2/6/2006 and unique markers R02_S00006::104. This line is intentionally unique within and across rounds.\nSegment r02_s00007 records a nonrepeating dataset for performance tracing. It includes identifiers 2/7/2007 and unique markers R02_S00007::121. This line is intentionally unique within and across rounds.\nSegment r02_s00008 records a granular benchmark for performance tracing. It includes identifiers 2/8/2008 and unique markers R02_S00008::138. This line is intentionally unique within and across rounds.\nSegment r02_s00009 records a deterministic profile for performance tracing. It includes identifiers 2/9/2009 and unique markers R02_S00009::155. This line is intentionally unique within and across rounds.\nSegment r02_s00010 records a cacheless session for performance tracing. It includes identifiers 2/10/2010 and unique markers R02_S00010::172. This line is intentionally unique within and across rounds.\nSegment r02_s00011 records a multimodal request for performance tracing. It includes identifiers 2/11/2011 and unique markers R02_S00011::189. This line is intentionally unique within and across rounds.\nSegment r02_s00012 records a latency-aware timeline for performance tracing. It includes identifiers 2/12/2012 and unique markers R02_S00012::206. This line is intentionally unique within and across rounds.\nSegment r02_s00013 records a token-precise sample for performance tracing. It includes identifiers 2/13/2013 and unique markers R02_S00013::223. This line is intentionally unique within and across rounds.\nSegment r02_s00014 records a vision-heavy payload for performance tracing. It includes identifiers 2/14/2014 and unique markers R02_S00014::240. This line is intentionally unique within and across rounds.\nSegment r02_s00015 records a nonrepeating dataset for performance tracing. It includes identifiers 2/15/2015 and unique markers R02_S00015::257. This line is intentionally unique within and across rounds.\nSegment r02_s00016 records a granular benchmark for performance tracing. It includes identifiers 2/16/2016 and unique markers R02_S00016::274. This line is intentionally unique within and across rounds.\nSegment r02_s00017 records a deterministic profile for performance tracing. It includes identifiers 2/17/2017 and unique markers R02_S00017::291. This line is intentionally unique within and across rounds.\nSegment r02_s00018 records a cacheless session for performance tracing. It includes identifiers 2/18/2018 and unique markers R02_S00018::308. This line is intentionally unique within and across rounds.\nSegment r02_s00019 records a multimodal request for performance tracing. It includes identifiers 2/19/2019 and unique markers R02_S00019::325. This line is intentionally unique within and across rounds.\nSegment r02_s00020 records a latency-aware timeline for performance tracing. It includes identifiers 2/20/2020 and unique markers R02_S00020::342. This line is intentionally unique within and across rounds.\nSegment r02_s00021 records a token-precise sample for performance tracing. It includes identifiers 2/21/2021 and unique markers R02_S00021::359. This line is intentionally unique within and across rounds.\nSegment r02_s00022 records a vision-heavy payload for performance tracing. It includes identifiers 2/22/2022 and unique markers R02_S00022::376. This line is intentionally unique within and across rounds.\nSegment r02_s00023 records a nonrepeating dataset for performance tracing. It includes identifiers 2/23/2023 and unique markers R02_S00023::393. This line is intentionally unique within and across rounds.\nSegment r02_s00024 records a granular benchmark for performance tracing. It includes identifiers 2/24/2024 and unique markers R02_S00024::410. This line is intentionally unique within and across rounds.\nSegment r02_s00025 records a deterministic profile for performance tracing. It includes identifiers 2/25/2025 and unique markers R02_S00025::427. This line is intentionally unique within and across rounds.\nSegment r02_s00026 records a cacheless session for performance tracing. It includes identifiers 2/26/2026 and unique markers R02_S00026::444. This line is intentionally unique within and across rounds.\nSegment r02_s00027 records a multimodal request for performance tracing. It includes identifiers 2/27/2027 and unique markers R02_S00027::461. This line is intentionally unique within and across rounds.\nSegment r02_s00028 records a latency-aware timeline for performance tracing. It includes identifiers 2/28/2028 and unique markers R02_S00028::478. This line is intentionally unique within and across rounds.\nSegment r02_s00029 records a token-precise sample for performance tracing. It includes identifiers 2/29/2029 and unique markers R02_S00029::495. This line is intentionally unique within and across rounds.\nSegment r02_s00030 records a vision-heavy payload for performance tracing. It includes identifiers 2/30/2030 and unique markers R02_S00030::512. This line is intentionally unique within and across rounds.\nSegment r02_s00031 records a nonrepeating dataset for performance tracing. It includes identifiers 2/31/2031 and unique markers R02_S00031::529. This line is intentionally unique within and across rounds.\nSegment r02_s00032 records a granular benchmark for performance tracing. It includes identifiers 2/32/2032 and unique markers R02_S00032::546. This line is intentionally unique within and across rounds.\nSegment r02_s00033 records a deterministic profile for performance tracing. It includes identifiers 2/33/2033 and unique markers R02_S00033::563. This line is intentionally unique within and across rounds.\nSegment r02_s00034 records a cacheless session for performance tracing. It includes identifiers 2/34/2034 and unique markers R02_S00034::580. This line is intentionally unique within and across rounds.\nSegment r02_s00035 records a multimodal request for performance tracing. It includes identifiers 2/35/2035 and unique markers R02_S00035::597. This line is intentionally unique within and across rounds.\nSegment r02_s00036 records a latency-aware timeline for performance tracing. It includes identifiers 2/36/2036 and unique markers R02_S00036::614. This line is intentionally unique within and across rounds.\nSegment r02_s00037 records a token-precise sample for performance tracing. It includes identifiers 2/37/2037 and unique markers R02_S00037::631. This line is intentionally unique within and across rounds.\nSegment r02_s00038 records a vision-heavy payload for performance tracing. It includes identifiers 2/38/2038 and unique markers R02_S00038::648. This line is intentionally unique within and across rounds.\nSegment r02_s00039 records a nonrepeating dataset for performance tracing. It includes identifiers 2/39/2039 and unique markers R02_S00039::665. This line is intentionally unique within and across rounds.\nSegment r02_s00040 records a granular benchmark for performance tracing. It includes identifiers 2/40/2040 and unique markers R02_S00040::682. This line is intentionally unique within and across rounds.\nSegment r02_s00041 records a deterministic profile for performance tracing. It includes identifiers 2/41/2041 and unique markers R02_S00041::699. This line is intentionally unique within and across rounds.\nSegment r02_s00042 records a cacheless session for performance tracing. It includes identifiers 2/42/2042 and unique markers R02_S00042::716. This line is intentionally unique within and across rounds.\nSegment r02_s00043 records a multimodal request for performance tracing. It includes identifiers 2/43/2043 and unique markers R02_S00043::733. This line is intentionally unique within and across rounds.\nSegment r02_s00044 records a latency-aware timeline for performance tracing. It includes identifiers 2/44/2044 and unique markers R02_S00044::750. This line is intentionally unique within and across rounds.\nSegment r02_s00045 records a token-precise sample for performance tracing. It includes identifiers 2/45/2045 and unique markers R02_S00045::767. This line is intentionally unique within and across rounds.\nSegment r02_s00046 records a vision-heavy payload for performance tracing. It includes identifiers 2/46/2046 and unique markers R02_S00046::784. This line is intentionally unique within and across rounds.\nSegment r02_s00047 records a nonrepeating dataset for performance tracing. It includes identifiers 2/47/2047 and unique markers R02_S00047::801. This line is intentionally unique within and across rounds.\nSegment r02_s00048 records a granular benchmark for performance tracing. It includes identifiers 2/48/2048 and unique markers R02_S00048::818. This line is intentionally unique within and across rounds.\nSegment r02_s00049 records a deterministic profile for performance tracing. It includes identifiers 2/49/2049 and unique markers R02_S00049::835. This line is intentionally unique within and across rounds.\nSegment r02_s00050 records a cacheless session for performance tracing. It includes identifiers 2/50/2050 and unique markers R02_S00050::852. This line is intentionally unique within and across rounds.\nSegment r02_s00051 records a multimodal request for performance tracing. It includes identifiers 2/51/2051 and unique markers R02_S00051::869. This line is intentionally unique within and across rounds.\nSegment r02_s00052 records a latency-aware timeline for performance tracing. It includes identifiers 2/52/2052 and unique markers R02_S00052::886. This line is intentionally unique within and across rounds.\nSegment r02_s00053 records a token-precise sample for performance tracing. It includes identifiers 2/53/2053 and unique markers R02_S00053::903. This line is intentionally unique within and across rounds.\nSegment r02_s00054 records a vision-heavy payload for performance tracing. It includes identifiers 2/54/2054 and unique markers R02_S00054::920. This line is intentionally unique within and across rounds.\nSegment r02_s00055 records a nonrepeating dataset for performance tracing. It includes identifiers 2/55/2055 and unique markers R02_S00055::937. This line is intentionally unique within and across rounds.\nSegment r02_s00056 records a granular benchmark for performance tracing. It includes identifiers 2/56/2056 and unique markers R02_S00056::954. This line is intentionally unique within and across rounds.\nSegment r02_s00057 records a deterministic profile for performance tracing. It includes identifiers 2/57/2057 and unique markers R02_S00057::971. This line is intentionally unique within and across rounds.\nSegment r02_s00058 records a cacheless session for performance tracing. It includes identifiers 2/58/2058 and unique markers R02_S00058::988. This line is intentionally unique within and across rounds.\nSegment r02_s00059 records a multimodal request for performance tracing. It includes identifiers 2/59/2059 and unique markers R02_S00059::1005. This line is intentionally unique within and across rounds.\nSegment r02_s00060 records a latency-aware timeline for performance tracing. It includes identifiers 2/60/2060 and unique markers R02_S00060::1022. This line is intentionally unique within and across rounds.\nSegment r02_s00061 records a token-precise sample for performance tracing. It includes identifiers 2/61/2061 and unique markers R02_S00061::1039. This line is intentionally unique within and across rounds.\nSegment r02_s00062 records a vision-heavy payload for performance tracing. It includes identifiers 2/62/2062 and unique markers R02_S00062::1056. This line is intentionally unique within and across rounds.\nSegment r02_s00063 records a nonrepeating dataset for performance tracing. It includes identifiers 2/63/2063 and unique markers R02_S00063::1073. This line is intentionally unique within and across rounds.\nSegment r02_s00064 records a granular benchmark for performance tracing. It includes identifiers 2/64/2064 and unique markers R02_S00064::1090. This line is intentionally unique within and across rounds.\nSegment r02_s00065 records a deterministic profile for performance tracing. It includes identifiers 2/65/2065 and unique markers R02_S00065::1107. This line is intentionally unique within and across rounds.\nSegment r02_s00066 records a cacheless session for performance tracing. It includes identifiers 2/66/2066 and unique markers R02_S00066::1124. This line is intentionally unique within and across rounds.\nSegment r02_s00067 records a multimodal request for performance tracing. It includes identifiers 2/67/2067 and unique markers R02_S00067::1141. This line is intentionally unique within and across rounds.\nSegment r02_s00068 records a latency-aware timeline for performance tracing. It includes identifiers 2/68/2068 and unique markers R02_S00068::1158. This line is intentionally unique within and across rounds.\nSegment r02_s00069 records a token-precise sample for performance tracing. It includes identifiers 2/69/2069 and unique markers R02_S00069::1175. This line is intentionally unique within and across rounds.\nSegment r02_s00070 records a vision-heavy payload for performance tracing. It includes identifiers 2/70/2070 and unique markers R02_S00070::1192. This line is intentionally unique within and across rounds.\nSegment r02_s00071 records a nonrepeating dataset for performance tracing. It includes identifiers 2/71/2071 and unique markers R02_S00071::1209. This line is intentionally unique within and across rounds.\nSegment r02_s00072 records a granular benchmark for performance tracing. It includes identifiers 2/72/2072 and unique markers R02_S00072::1226. This line is intentionally unique within and across rounds.\nSegment r02_s00073 records a deterministic profile for performance tracing. It includes identifiers 2/73/2073 and unique markers R02_S00073::1243. This line is intentionally unique within and across rounds.\nSegment r02_s00074 records a cacheless session for performance tracing. It includes identifiers 2/74/2074 and unique markers R02_S00074::1260. This line is intentionally unique within and across rounds.\nSegment r02_s00075 records a multimodal request for performance tracing. It includes identifiers 2/75/2075 and unique markers R02_S00075::1277. This line is intentionally unique within and across rounds.\nSegment r02_s00076 records a latency-aware timeline for performance tracing. It includes identifiers 2/76/2076 and unique markers R02_S00076::1294. This line is intentionally unique within and across rounds.\nSegment r02_s00077 records a token-precise sample for performance tracing. It includes identifiers 2/77/2077 and unique markers R02_S00077::1311. This line is intentionally unique within and across rounds.\nSegment r02_s00078 records a vision-heavy payload for performance tracing. It includes identifiers 2/78/2078 and unique markers R02_S00078::1328. This line is intentionally unique within and across rounds.\nSegment r02_s00079 records a nonrepeating dataset for performance tracing. It includes identifiers 2/79/2079 and unique markers R02_S00079::1345. This line is intentionally unique within and across rounds.\nSegment r02_s00080 records a granular benchmark for performance tracing. It includes identifiers 2/80/2080 and unique markers R02_S00080::1362. This line is intentionally unique within and across rounds.\nSegment r02_s00081 records a deterministic profile for performance tracing. It includes identifiers 2/81/2081 and unique markers R02_S00081::1379. This line is intentionally unique within and across rounds.\nSegment r02_s00082 records a cacheless session for performance tracing. It includes identifiers 2/82/2082 and unique markers R02_S00082::1396. This line is intentionally unique within and across rounds.\nSegment r02_s00083 records a multimodal request for performance tracing. It includes identifiers 2/83/2083 and unique markers R02_S00083::1413. This line is intentionally unique within and across rounds.\nSegment r02_s00084 records a latency-aware timeline for performance tracing. It includes identifiers 2/84/2084 and unique markers R02_S00084::1430. This line is intentionally unique within and across rounds.\nSegment r02_s00085 records a token-precise sample for performance tracing. It includes identifiers 2/85/2085 and unique markers R02_S00085::1447. This line is intentionally unique within and across rounds.\nSegment r02_s00086 records a vision-heavy payload for performance tracing. It includes identifiers 2/86/2086 and unique markers R02_S00086::1464. This line is intentionally unique within and across rounds.\nSegment r02_s00087 records a nonrepeating dataset for performance tracing. It includes identifiers 2/87/2087 and unique markers R02_S00087::1481. This line is intentionally unique within and across rounds.\nSegment r02_s00088 records a granular benchmark for performance tracing. It includes identifiers 2/88/2088 and unique markers R02_S00088::1498. This line is intentionally unique within and across rounds.\nSegment r02_s00089 records a deterministic profile for performance tracing. It includes identifiers 2/89/2089 and unique markers R02_S00089::1515. This line is intentionally unique within and across rounds.\nSegment r02_s00090 records a cacheless session for performance tracing. It includes identifiers 2/90/2090 and unique markers R02_S00090::1532. This line is intentionally unique within and across rounds.\nSegment r02_s00091 records a multimodal request for performance tracing. It includes identifiers 2/91/2091 and unique markers R02_S00091::1549. This line is intentionally unique within and across rounds.\nSegment r02_s00092 records a latency-aware timeline for performance tracing. It includes identifiers 2/92/2092 and unique markers R02_S00092::1566. This line is intentionally unique within and across rounds.\nSegment r02_s00093 records a token-precise sample for performance tracing. It includes identifiers 2/93/2093 and unique markers R02_S00093::1583. This line is intentionally unique within and across rounds.\nSegment r02_s00094 records a vision-heavy payload for performance tracing. It includes identifiers 2/94/2094 and unique markers R02_S00094::1600. This line is intentionally unique within and across rounds.\nSegment r02_s00095 records a nonrepeating dataset for performance tracing. It includes identifiers 2/95/2095 and unique markers R02_S00095::1617. This line is intentionally unique within and across rounds.\nSegment r02_s00096 records a granular benchmark for performance tracing. It includes identifiers 2/96/2096 and unique markers R02_S00096::1634. This line is intentionally unique within and across rounds.\nSegment r02_s00097 records a deterministic profile for performance tracing. It includes identifiers 2/97/2097 and unique markers R02_S00097::1651. This line is intentionally unique within and across rounds.\nSegment r02_s00098 records a cacheless session for performance tracing. It includes identifiers 2/98/2098 and unique markers R02_S00098::1668. This line is intentionally unique within and across rounds.\nSegment r02_s00099 records a multimodal request for performance tracing. It includes identifiers 2/99/2099 and unique markers R02_S00099::1685. This line is intentionally unique within and across rounds.\nSegment r02_s00100 records a latency-aware timeline for performance tracing. It includes identifiers 2/100/2100 and unique markers R02_S00100::1702. This line is intentionally unique within and across rounds.\nSegment r02_s00101 records a token-precise sample for performance tracing. It includes identifiers 2/101/2101 and unique markers R02_S00101::1719. This line is intentionally unique within and across rounds.\nSegment r02_s00102 records a vision-heavy payload for performance tracing. It includes identifiers 2/102/2102 and unique markers R02_S00102::1736. This line is intentionally unique within and across rounds.\nSegment r02_s00103 records a nonrepeating dataset for performance tracing. It includes identifiers 2/103/2103 and unique markers R02_S00103::1753. This line is intentionally unique within and across rounds.\nSegment r02_s00104 records a granular benchmark for performance tracing. It includes identifiers 2/104/2104 and unique markers R02_S00104::1770. This line is intentionally unique within and across rounds.\nSegment r02_s00105 records a deterministic profile for performance tracing. It includes identifiers 2/105/2105 and unique markers R02_S00105::1787. This line is intentionally unique within and across rounds.\nSegment r02_s00106 records a cacheless session for performance tracing. It includes identifiers 2/106/2106 and unique markers R02_S00106::1804. This line is intentionally unique within and across rounds.\nSegment r02_s00107 records a multimodal request for performance tracing. It includes identifiers 2/107/2107 and unique markers R02_S00107::1821. This line is intentionally unique within and across rounds.\nSegment r02_s00108 records a latency-aware timeline for performance tracing. It includes identifiers 2/108/2108 and unique markers R02_S00108::1838. This line is intentionally unique within and across rounds.\nSegment r02_s00109 records a token-precise sample for performance tracing. It includes identifiers 2/109/2109 and unique markers R02_S00109::1855. This line is intentionally unique within and across rounds.\nSegment r02_s00110 records a vision-heavy payload for performance tracing. It includes identifiers 2/110/2110 and unique markers R02_S00110::1872. This line is intentionally unique within and across rounds.\nSegment r02_s00111 records a nonrepeating dataset for performance tracing. It includes identifiers 2/111/2111 and unique markers R02_S00111::1889. This line is intentionally unique within and across rounds.\nSegment r02_s00112 records a granular benchmark for performance tracing. It includes identifiers 2/112/2112 and unique markers R02_S00112::1906. This line is intentionally unique within and across rounds.\nSegment r02_s00113 records a deterministic profile for performance tracing. It includes identifiers 2/113/2113 and unique markers R02_S00113::1923. This line is intentionally unique within and across rounds.\nSegment r02_s00114 records a cacheless session for performance tracing. It includes identifiers 2/114/2114 and unique markers R02_S00114::1940. This line is intentionally unique within and across rounds.\nSegment r02_s00115 records a multimodal request for performance tracing. It includes identifiers 2/115/2115 and unique markers R02_S00115::1957. This line is intentionally unique within and across rounds.\nSegment r02_s00116 records a latency-aware timeline for performance tracing. It includes identifiers 2/116/2116 and unique markers R02_S00116::1974. This line is intentionally unique within and across rounds.\nSegment r02_s00117 records a token-precise sample for performance tracing. It includes identifiers 2/117/2117 and unique markers R02_S00117::1991. This line is intentionally unique within and across rounds.\nSegment r02_s00118 records a vision-heavy payload for performance tracing. It includes identifiers 2/118/2118 and unique markers R02_S00118::2008. This line is intentionally unique within and across rounds.\nSegment r02_s00119 records a nonrepeating dataset for performance tracing. It includes identifiers 2/119/2119 and unique markers R02_S00119::2025. This line is intentionally unique within and across rounds.\nSegment r02_s00120 records a granular benchmark for performance tracing. It includes identifiers 2/120/2120 and unique markers R02_S00120::2042. This line is intentionally unique within and across rounds.\nSegment r02_s00121 records a deterministic profile for performance tracing. It includes identifiers 2/121/2121 and unique markers R02_S00121::2059. This line is intentionally unique within and across rounds.\nSegment r02_s00122 records a cacheless session for performance tracing. It includes identifiers 2/122/2122 and unique markers R02_S00122::2076. This line is intentionally unique within and across rounds.\nSegment r02_s00123 records a multimodal request for performance tracing. It includes identifiers 2/123/2123 and unique markers R02_S00123::2093. This line is intentionally unique within and across rounds.\nSegment r02_s00124 records a latency-aware timeline for performance tracing. It includes identifiers 2/124/2124 and unique markers R02_S00124::2110. This line is intentionally unique within and across rounds.\nSegment r02_s00125 records a token-precise sample for performance tracing. It includes identifiers 2/125/2125 and unique markers R02_S00125::2127. This line is intentionally unique within and across rounds.\nSegment r02_s00126 records a vision-heavy payload for performance tracing. It includes identifiers 2/126/2126 and unique markers R02_S00126::2144. This line is intentionally unique within and across rounds.\nSegment r02_s00127 records a nonrepeating dataset for performance tracing. It includes identifiers 2/127/2127 and unique markers R02_S00127::2161. This line is intentionally unique within and across rounds.\nSegment r02_s00128 records a granular benchmark for performance tracing. It includes identifiers 2/128/2128 and unique markers R02_S00128::2178. This line is intentionally unique within and across rounds.\nSegment r02_s00129 records a deterministic profile for performance tracing. It includes identifiers 2/129/2129 and unique markers R02_S00129::2195. This line is intentionally unique within and across rounds.\nSegment r02_s00130 records a cacheless session for performance tracing. It includes identifiers 2/130/2130 and unique markers R02_S00130::2212. This line is intentionally unique within and across rounds.\nSegment r02_s00131 records a multimodal request for performance tracing. It includes identifiers 2/131/2131 and unique markers R02_S00131::2229. This line is intentionally unique within and across rounds.\nSegment r02_s00132 records a latency-aware timeline for performance tracing. It includes identifiers 2/132/2132 and unique markers R02_S00132::2246. This line is intentionally unique within and across rounds.\nSegment r02_s00133 records a token-precise sample for performance tracing. It includes identifiers 2/133/2133 and unique markers R02_S00133::2263. This line is intentionally unique within and across rounds.\nSegment r02_s00134 records a vision-heavy payload for performance tracing. It includes identifiers 2/134/2134 and unique markers R02_S00134::2280. This line is intentionally unique within and across rounds.\nSegment r02_s00135 records a nonrepeating dataset for performance tracing. It includes identifiers 2/135/2135 and unique markers R02_S00135::2297. This line is intentionally unique within and across rounds.\nSegment r02_s00136 records a granular benchmark for performance tracing. It includes identifiers 2/136/2136 and unique markers R02_S00136::2314. This line is intentionally unique within and across rounds.\nSegment r02_s00137 records a deterministic profile for performance tracing. It includes identifiers 2/137/2137 and unique markers R02_S00137::2331. This line is intentionally unique within and across rounds.\nSegment r02_s00138 records a cacheless session for performance tracing. It includes identifiers 2/138/2138 and unique markers R02_S00138::2348. This line is intentionally unique within and across rounds.\nSegment r02_s00139 records a multimodal request for performance tracing. It includes identifiers 2/139/2139 and unique markers R02_S00139::2365. This line is intentionally unique within and across rounds.\nSegment r02_s00140 records a latency-aware timeline for performance tracing. It includes identifiers 2/140/2140 and unique markers R02_S00140::2382. This line is intentionally unique within and across rounds.\nSegment r02_s00141 records a token-precise sample for performance tracing. It includes identifiers 2/141/2141 and unique markers R02_S00141::2399. This line is intentionally unique within and across rounds.\nSegment r02_s00142 records a vision-heavy payload for performance tracing. It includes identifiers 2/142/2142 and unique markers R02_S00142::2416. This line is intentionally unique within and across rounds.\nSegment r02_s00143 records a nonrepeating dataset for performance tracing. It includes identifiers 2/143/2143 and unique markers R02_S00143::2433. This line is intentionally unique within and across rounds.\nSegment r02_s00144 records a granular benchmark for performance tracing. It includes identifiers 2/144/2144 and unique markers R02_S00144::2450. This line is intentionally unique within and across rounds.\nSegment r02_s00145 records a deterministic profile for performance tracing. It includes identifiers 2/145/2145 and unique markers R02_S00145::2467. This line is intentionally unique within and across rounds.\nSegment r02_s00146 records a cacheless session for performance tracing. It includes identifiers 2/146/2146 and unique markers R02_S00146::2484. This line is intentionally unique within and across rounds.\nSegment r02_s00147 records a multimodal request for performance tracing. It includes identifiers 2/147/2147 and unique markers R02_S00147::2501. This line is intentionally unique within and across rounds.\nSegment r02_s00148 records a latency-aware timeline for performance tracing. It includes identifiers 2/148/2148 and unique markers R02_S00148::2518. This line is intentionally unique within and across rounds.\nSegment r02_s00149 records a token-precise sample for performance tracing. It includes identifiers 2/149/2149 and unique markers R02_S00149::2535. This line is intentionally unique within and across rounds.\nSegment r02_s00150 records a vision-heavy payload for performance tracing. It includes identifiers 2/150/2150 and unique markers R02_S00150::2552. This line is intentionally unique within and across rounds.\nSegment r02_s00151 records a nonrepeating dataset for performance tracing. It includes identifiers 2/151/2151 and unique markers R02_S00151::2569. This line is intentionally unique within and across rounds.\nSegment r02_s00152 records a granular benchmark for performance tracing. It includes identifiers 2/152/2152 and unique markers R02_S00152::2586. This line is intentionally unique within and across rounds.\nSegment r02_s00153 records a deterministic profile for performance tracing. It includes identifiers 2/153/2153 and unique markers R02_S00153::2603. This line is intentionally unique within and across rounds.\nSegment r02_s00154 records a cacheless session for performance tracing. It includes identifiers 2/154/2154 and unique markers R02_S00154::2620. This line is intentionally unique within and across rounds.\nSegment r02_s00155 records a multimodal request for performance tracing. It includes identifiers 2/155/2155 and unique markers R02_S00155::2637. This line is intentionally unique within and across rounds.\nSegment r02_s00156 records a latency-aware timeline for performance tracing. It includes identifiers 2/156/2156 and unique markers R02_S00156::2654. This line is intentionally unique within and across rounds.\nSegment r02_s00157 records a token-precise sample for performance tracing. It includes identifiers 2/157/2157 and unique markers R02_S00157::2671. This line is intentionally unique within and across rounds.\nSegment r02_s00158 records a vision-heavy payload for performance tracing. It includes identifiers 2/158/2158 and unique markers R02_S00158::2688. This line is intentionally unique within and across rounds.\nSegment r02_s00159 records a nonrepeating dataset for performance tracing. It includes identifiers 2/159/2159 and unique markers R02_S00159::2705. This line is intentionally unique within and across rounds.\nSegment r02_s00160 records a granular benchmark for performance tracing. It includes identifiers 2/160/2160 and unique markers R02_S00160::2722. This line is intentionally unique within and across rounds.\nSegment r02_s00161 records a deterministic profile for performance tracing. It includes identifiers 2/161/2161 and unique markers R02_S00161::2739. This line is intentionally unique within and across rounds.\nSegment r02_s00162 records a cacheless session for performance tracing. It includes identifiers 2/162/2162 and unique markers R02_S00162::2756. This line is intentionally unique within and across rounds.\n note[02:00163:00001] code=215813 z00003"
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_00.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_01.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_02.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_03.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_04.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_05.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_06.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_07.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_08.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_09.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_10.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_11.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_12.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_13.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_14.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_15.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_16.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_17.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_18.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_19.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_20.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_21.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_22.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_23.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_24.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_25.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_26.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_27.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_28.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_29.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_30.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_31.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_32.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_33.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_34.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_35.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_36.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_37.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_38.png"
+          }
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "file:///mnt/sfs_turbo/codes/lzp/0407/data/round_2/images/img_39.png"
+          }
+        }
+      ]
+    }
+  ],
+  "max_completion_tokens": 128,
+  "temperature": 0,
+  "stream": true,
+  "chat_template_kwargs": {
+    "enable_thinking": false
+  }
+}

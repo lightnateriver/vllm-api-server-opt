@@ -1,0 +1,137 @@
+{
+  "case_id": "19",
+  "image_count": 19,
+  "question_type": "index",
+  "question": "Which image is the red rhombus? Answer only one number.",
+  "gold_answer": "17",
+  "target": {
+    "index": 17,
+    "shape": "rhombus",
+    "color": "red",
+    "filename": "17_red_rhombus.jpg"
+  },
+  "images": [
+    {
+      "index": 1,
+      "shape": "square",
+      "color": "white",
+      "filename": "01_white_square.jpg"
+    },
+    {
+      "index": 2,
+      "shape": "triangle",
+      "color": "orange",
+      "filename": "02_orange_triangle.jpg"
+    },
+    {
+      "index": 3,
+      "shape": "square",
+      "color": "green",
+      "filename": "03_green_square.jpg"
+    },
+    {
+      "index": 4,
+      "shape": "cylinder",
+      "color": "red",
+      "filename": "04_red_cylinder.jpg"
+    },
+    {
+      "index": 5,
+      "shape": "cube",
+      "color": "white",
+      "filename": "05_white_cube.jpg"
+    },
+    {
+      "index": 6,
+      "shape": "cube",
+      "color": "pink",
+      "filename": "06_pink_cube.jpg"
+    },
+    {
+      "index": 7,
+      "shape": "cylinder",
+      "color": "purple",
+      "filename": "07_purple_cylinder.jpg"
+    },
+    {
+      "index": 8,
+      "shape": "rhombus",
+      "color": "black",
+      "filename": "08_black_rhombus.jpg"
+    },
+    {
+      "index": 9,
+      "shape": "rectangle",
+      "color": "brown",
+      "filename": "09_brown_rectangle.jpg"
+    },
+    {
+      "index": 10,
+      "shape": "cube",
+      "color": "yellow",
+      "filename": "10_yellow_cube.jpg"
+    },
+    {
+      "index": 11,
+      "shape": "triangle",
+      "color": "pink",
+      "filename": "11_pink_triangle.jpg"
+    },
+    {
+      "index": 12,
+      "shape": "cylinder",
+      "color": "blue",
+      "filename": "12_blue_cylinder.jpg"
+    },
+    {
+      "index": 13,
+      "shape": "rectangle",
+      "color": "pink",
+      "filename": "13_pink_rectangle.jpg"
+    },
+    {
+      "index": 14,
+      "shape": "cube",
+      "color": "brown",
+      "filename": "14_brown_cube.jpg"
+    },
+    {
+      "index": 15,
+      "shape": "square",
+      "color": "blue",
+      "filename": "15_blue_square.jpg"
+    },
+    {
+      "index": 16,
+      "shape": "cone",
+      "color": "brown",
+      "filename": "16_brown_cone.jpg"
+    },
+    {
+      "index": 17,
+      "shape": "rhombus",
+      "color": "red",
+      "filename": "17_red_rhombus.jpg"
+    },
+    {
+      "index": 18,
+      "shape": "cylinder",
+      "color": "orange",
+      "filename": "18_orange_cylinder.jpg"
+    },
+    {
+      "index": 19,
+      "shape": "rectangle",
+      "color": "orange",
+      "filename": "19_orange_rectangle.jpg"
+    }
+  ],
+  "media_mode": "local_path",
+  "status": "wrong",
+  "error_type": "wrong_answer",
+  "raw_prediction": "16",
+  "extracted_prediction": "16",
+  "strict_raw_ok": false,
+  "latency_sec": 2.445,
+  "finish_reason": "stop"
+}
