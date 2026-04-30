@@ -108,6 +108,17 @@ def _phase4_http_max_file_bytes() -> int:
         return 64 * 1024 * 1024
 
 
+def _phase4_http_cache_max_bytes() -> int:
+    raw = os.environ.get("VLLM_ASCEND_HTTP_CACHE_MAX_GB", "0").strip() or "0"
+    try:
+        max_gb = float(raw)
+    except ValueError:
+        return 0
+    if max_gb <= 0:
+        return 0
+    return int(max_gb * 1024 * 1024 * 1024)
+
+
 def _phase4_http_chunk_bytes() -> int:
     raw = os.environ.get(
         "VLLM_ASCEND_HTTP_CHUNK_BYTES",
@@ -136,6 +147,10 @@ def _phase4_http_meta_path(cache_key: str) -> Path:
 
 def _phase4_http_lock_path(cache_key: str) -> Path:
     return _phase4_http_cache_dir() / f"{cache_key}.lock"
+
+
+def _phase4_http_gc_lock_path() -> Path:
+    return _phase4_http_cache_dir() / ".phase4_gc.lock"
 
 
 def _phase4_guess_http_suffix(
@@ -181,6 +196,312 @@ def _phase4_http_meta_is_fresh(meta: dict, *, ttl_s: int) -> bool:
     return (time.time() - float(downloaded_at)) <= ttl_s
 
 
+def _phase4_try_lock_file(lock_path: Path, *, blocking: bool):
+    lock_fp = open(lock_path, "a+", encoding="utf-8")
+    flags = fcntl.LOCK_EX
+    if not blocking:
+        flags |= fcntl.LOCK_NB
+    try:
+        fcntl.flock(lock_fp.fileno(), flags)
+        return lock_fp
+    except OSError:
+        lock_fp.close()
+        return None
+
+
+def _phase4_unlock_file(lock_fp) -> None:
+    if lock_fp is None:
+        return
+    try:
+        fcntl.flock(lock_fp.fileno(), fcntl.LOCK_UN)
+    except Exception:
+        pass
+    try:
+        lock_fp.close()
+    except Exception:
+        pass
+
+
+def _phase4_cache_file_candidates(
+    cache_key: str,
+    *,
+    explicit_local_path: Path | None = None,
+) -> list[Path]:
+    cache_dir = _phase4_http_cache_dir()
+    lock_path = _phase4_http_lock_path(cache_key).resolve()
+    candidates: list[Path] = []
+
+    if explicit_local_path is not None:
+        candidates.append(explicit_local_path.resolve())
+
+    for path in cache_dir.glob(f"{cache_key}*"):
+        try:
+            resolved = path.resolve()
+        except Exception:
+            resolved = path
+        if resolved == lock_path:
+            continue
+        candidates.append(resolved)
+
+    deduped: list[Path] = []
+    seen: set[str] = set()
+    for path in candidates:
+        key = str(path)
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(path)
+    return deduped
+
+
+def _phase4_remove_cache_files(paths: list[Path]) -> list[str]:
+    removed: list[str] = []
+    for path in paths:
+        try:
+            path.unlink(missing_ok=True)
+            removed.append(str(path))
+        except Exception:
+            continue
+    return removed
+
+
+def _phase4_invalidate_http_cache(
+    canonical_http_url: str | None,
+    *,
+    image_url: str | None,
+    local_path: str | None,
+    reason: str,
+    error: str | None = None,
+) -> dict:
+    if not isinstance(canonical_http_url, str) or not canonical_http_url:
+        return {"removed_files": [], "cache_key": None}
+
+    cache_key = _phase4_http_cache_key(canonical_http_url)
+    explicit_path = Path(local_path) if isinstance(local_path, str) and local_path else None
+    meta_path = _phase4_http_meta_path(cache_key)
+    removed_files: list[str] = []
+
+    lock_fp = _phase4_try_lock_file(_phase4_http_lock_path(cache_key), blocking=True)
+    try:
+        if lock_fp is not None:
+            removed_files = _phase4_remove_cache_files(
+                _phase4_cache_file_candidates(
+                    cache_key,
+                    explicit_local_path=explicit_path,
+                )
+            )
+    finally:
+        _phase4_unlock_file(lock_fp)
+
+    _append_trace(
+        {
+            "ts": time.time(),
+            "pid": os.getpid(),
+            "stage": "phase4_http_cache_invalid",
+            "image_url": image_url,
+            "canonical_http_url": canonical_http_url,
+            "cache_key": cache_key,
+            "local_path": local_path,
+            "meta_path": str(meta_path.resolve()),
+            "source_key": f"http:{canonical_http_url}",
+            "invalid_reason": reason,
+            "error": error,
+            "removed_files": removed_files,
+        }
+    )
+    return {"removed_files": removed_files, "cache_key": cache_key}
+
+
+def _phase4_collect_cache_entries(cache_dir: Path, *, ttl_s: int) -> list[dict]:
+    entries: list[dict] = []
+    for meta_path in cache_dir.glob("*.json"):
+        cache_key = meta_path.stem
+        meta = _phase4_load_http_meta(meta_path)
+        local_path = meta.get("local_path") if isinstance(meta, dict) else None
+        local_path_obj = Path(local_path) if isinstance(local_path, str) else None
+        downloaded_at = meta.get("downloaded_at") if isinstance(meta, dict) else None
+        if isinstance(downloaded_at, (int, float)):
+            downloaded_at_value = float(downloaded_at)
+        else:
+            downloaded_at_value = None
+        exists = bool(local_path_obj and local_path_obj.exists())
+        fresh = bool(isinstance(meta, dict) and _phase4_http_meta_is_fresh(meta, ttl_s=ttl_s))
+        size_bytes = 0
+        if exists and local_path_obj is not None:
+            try:
+                size_bytes = int(local_path_obj.stat().st_size)
+            except OSError:
+                size_bytes = 0
+        entries.append(
+            {
+                "cache_key": cache_key,
+                "meta_path": meta_path,
+                "meta": meta,
+                "local_path": local_path_obj,
+                "canonical_http_url": (
+                    meta.get("canonical_http_url") if isinstance(meta, dict) else None
+                ),
+                "downloaded_at": downloaded_at_value,
+                "exists": exists,
+                "fresh": fresh,
+                "size_bytes": size_bytes,
+            }
+        )
+    return entries
+
+
+def _phase4_evict_http_cache_entry(
+    entry: dict,
+    *,
+    reason: str,
+    image_url: str | None = None,
+) -> dict:
+    cache_key = entry.get("cache_key")
+    if not isinstance(cache_key, str) or not cache_key:
+        return {"removed": False, "removed_files": [], "busy": False}
+
+    lock_fp = _phase4_try_lock_file(_phase4_http_lock_path(cache_key), blocking=False)
+    if lock_fp is None:
+        return {"removed": False, "removed_files": [], "busy": True}
+
+    try:
+        explicit_local_path = entry.get("local_path")
+        if not isinstance(explicit_local_path, Path):
+            explicit_local_path = None
+        removed_files = _phase4_remove_cache_files(
+            _phase4_cache_file_candidates(
+                cache_key,
+                explicit_local_path=explicit_local_path,
+            )
+        )
+    finally:
+        _phase4_unlock_file(lock_fp)
+
+    canonical_http_url = entry.get("canonical_http_url")
+    _append_trace(
+        {
+            "ts": time.time(),
+            "pid": os.getpid(),
+            "stage": "phase4_http_cache_evict",
+            "image_url": image_url,
+            "canonical_http_url": canonical_http_url,
+            "cache_key": cache_key,
+            "source_key": (
+                f"http:{canonical_http_url}"
+                if isinstance(canonical_http_url, str) and canonical_http_url
+                else None
+            ),
+            "evict_reason": reason,
+            "removed_files": removed_files,
+        }
+    )
+    return {"removed": bool(removed_files), "removed_files": removed_files, "busy": False}
+
+
+def _phase4_prune_http_cache(
+    *,
+    cache_dir: Path,
+    image_url: str | None,
+    current_cache_key: str | None,
+) -> None:
+    ttl_s = _phase4_http_cache_ttl_s()
+    max_bytes = _phase4_http_cache_max_bytes()
+    if ttl_s < 0 and max_bytes <= 0:
+        return
+
+    gc_lock_fp = _phase4_try_lock_file(_phase4_http_gc_lock_path(), blocking=False)
+    if gc_lock_fp is None:
+        return
+
+    try:
+        entries = _phase4_collect_cache_entries(cache_dir, ttl_s=ttl_s)
+        initial_total_bytes = sum(
+            entry["size_bytes"]
+            for entry in entries
+            if entry.get("fresh") and isinstance(entry.get("size_bytes"), int)
+        )
+        expired_removed = 0
+        capacity_removed = 0
+        skipped_busy = 0
+
+        live_entries: list[dict] = []
+        for entry in entries:
+            if entry.get("fresh"):
+                live_entries.append(entry)
+                continue
+            result = _phase4_evict_http_cache_entry(
+                entry,
+                reason="expired_or_missing",
+                image_url=image_url,
+            )
+            if result.get("busy"):
+                skipped_busy += 1
+            elif result.get("removed"):
+                expired_removed += 1
+
+        if max_bytes > 0:
+            live_entries = [
+                entry
+                for entry in live_entries
+                if entry.get("exists")
+                and isinstance(entry.get("size_bytes"), int)
+            ]
+            total_live_bytes = sum(int(entry["size_bytes"]) for entry in live_entries)
+            eviction_candidates = sorted(
+                (
+                    entry
+                    for entry in live_entries
+                    if entry.get("cache_key") != current_cache_key
+                ),
+                key=lambda item: (
+                    item.get("downloaded_at")
+                    if isinstance(item.get("downloaded_at"), float)
+                    else 0.0,
+                    str(item.get("meta_path")),
+                ),
+            )
+            for entry in eviction_candidates:
+                if total_live_bytes <= max_bytes:
+                    break
+                result = _phase4_evict_http_cache_entry(
+                    entry,
+                    reason="capacity_limit",
+                    image_url=image_url,
+                )
+                if result.get("busy"):
+                    skipped_busy += 1
+                    continue
+                if result.get("removed"):
+                    total_live_bytes -= int(entry.get("size_bytes") or 0)
+                    capacity_removed += 1
+
+        remaining_entries = _phase4_collect_cache_entries(cache_dir, ttl_s=ttl_s)
+        remaining_total_bytes = sum(
+            entry["size_bytes"]
+            for entry in remaining_entries
+            if entry.get("fresh") and isinstance(entry.get("size_bytes"), int)
+        )
+        _append_trace(
+            {
+                "ts": time.time(),
+                "pid": os.getpid(),
+                "stage": "phase4_http_cache_gc",
+                "image_url": image_url,
+                "current_cache_key": current_cache_key,
+                "cache_dir": str(cache_dir.resolve()),
+                "ttl_s": ttl_s,
+                "max_bytes": max_bytes,
+                "initial_total_bytes": initial_total_bytes,
+                "remaining_total_bytes": remaining_total_bytes,
+                "expired_removed": expired_removed,
+                "capacity_removed": capacity_removed,
+                "skipped_busy": skipped_busy,
+            }
+        )
+    finally:
+        _phase4_unlock_file(gc_lock_fp)
+
+
 def _phase4_materialize_http_url(image_url: str | None) -> tuple[str | None, dict | None]:
     canonical_http_url = _canonical_http_url(image_url)
     if canonical_http_url is None:
@@ -194,123 +515,141 @@ def _phase4_materialize_http_url(image_url: str | None) -> tuple[str | None, dic
     lock_path = _phase4_http_lock_path(cache_key)
     ttl_s = _phase4_http_cache_ttl_s()
 
-    with open(lock_path, "a+", encoding="utf-8") as lock_fp:
-        fcntl.flock(lock_fp.fileno(), fcntl.LOCK_EX)
-        try:
-            cached_meta = _phase4_load_http_meta(meta_path)
-            if cached_meta and _phase4_http_meta_is_fresh(cached_meta, ttl_s=ttl_s):
-                local_path = str(Path(cached_meta["local_path"]).resolve())
-                _append_trace(
-                    {
-                        "ts": time.time(),
-                        "pid": os.getpid(),
-                        "stage": "phase4_http_cache_hit",
-                        "image_url": image_url,
-                        "canonical_http_url": canonical_http_url,
-                        "local_path": local_path,
-                        "source_key": f"http:{canonical_http_url}",
-                    }
-                )
-                return local_path, cached_meta
-
-            timeout_s = _phase4_http_timeout_s()
-            max_file_bytes = _phase4_http_max_file_bytes()
-            chunk_bytes = _phase4_http_chunk_bytes()
-
-            request_obj = Request(
-                canonical_http_url,
-                headers={
-                    "User-Agent": _phase4_http_user_agent(),
-                    "Accept": "image/*,*/*;q=0.8",
-                },
-            )
-
-            tmp_path: Path | None = None
-            try:
-                with urlopen(request_obj, timeout=timeout_s) as resp:
-                    content_type = resp.headers.get("Content-Type")
-                    etag = resp.headers.get("ETag")
-                    last_modified = resp.headers.get("Last-Modified")
-                    content_length_header = resp.headers.get("Content-Length")
-                    suffix = _phase4_guess_http_suffix(
-                        canonical_http_url,
-                        content_type=content_type,
-                    )
-                    with tempfile.NamedTemporaryFile(
-                        dir=cache_dir,
-                        prefix=f"{cache_key}.",
-                        suffix=".download",
-                        delete=False,
-                    ) as tmp_fp:
-                        total_bytes = 0
-                        while True:
-                            chunk = resp.read(chunk_bytes)
-                            if not chunk:
-                                break
-                            total_bytes += len(chunk)
-                            if total_bytes > max_file_bytes:
-                                raise ValueError(
-                                    f"phase4 http image exceeds max bytes: "
-                                    f"{total_bytes} > {max_file_bytes}"
-                                )
-                            tmp_fp.write(chunk)
-                        tmp_path = Path(tmp_fp.name)
-
-                final_path = cache_dir / f"{cache_key}{suffix}"
-                os.replace(tmp_path, final_path)
-                tmp_path = None
-
-                meta = {
+    lock_fp = _phase4_try_lock_file(lock_path, blocking=True)
+    try:
+        if lock_fp is None:
+            _append_trace(
+                {
+                    "ts": time.time(),
+                    "pid": os.getpid(),
+                    "stage": "phase4_http_cache_error",
+                    "image_url": image_url,
                     "canonical_http_url": canonical_http_url,
-                    "local_path": str(final_path.resolve()),
-                    "downloaded_at": time.time(),
-                    "content_type": content_type,
-                    "content_length": (
-                        int(content_length_header)
-                        if isinstance(content_length_header, str)
-                        and content_length_header.isdigit()
-                        else None
-                    ),
-                    "etag": etag,
-                    "last_modified": last_modified,
+                    "source_key": f"http:{canonical_http_url}",
+                    "error": "lock_acquire_failed",
                 }
-                with open(meta_path, "w", encoding="utf-8") as meta_fp:
-                    json.dump(meta, meta_fp, ensure_ascii=True, sort_keys=True)
+            )
+            return None, None
 
-                _append_trace(
-                    {
-                        "ts": time.time(),
-                        "pid": os.getpid(),
-                        "stage": "phase4_http_cache_fill",
-                        "image_url": image_url,
-                        "canonical_http_url": canonical_http_url,
-                        "local_path": meta["local_path"],
-                        "content_type": content_type,
-                        "content_length": meta["content_length"],
-                        "source_key": f"http:{canonical_http_url}",
-                    }
+        cached_meta = _phase4_load_http_meta(meta_path)
+        if cached_meta and _phase4_http_meta_is_fresh(cached_meta, ttl_s=ttl_s):
+            local_path = str(Path(cached_meta["local_path"]).resolve())
+            _append_trace(
+                {
+                    "ts": time.time(),
+                    "pid": os.getpid(),
+                    "stage": "phase4_http_cache_hit",
+                    "image_url": image_url,
+                    "canonical_http_url": canonical_http_url,
+                    "local_path": local_path,
+                    "source_key": f"http:{canonical_http_url}",
+                }
+            )
+            return local_path, cached_meta
+
+        timeout_s = _phase4_http_timeout_s()
+        max_file_bytes = _phase4_http_max_file_bytes()
+        chunk_bytes = _phase4_http_chunk_bytes()
+
+        request_obj = Request(
+            canonical_http_url,
+            headers={
+                "User-Agent": _phase4_http_user_agent(),
+                "Accept": "image/*,*/*;q=0.8",
+            },
+        )
+
+        tmp_path: Path | None = None
+        try:
+            with urlopen(request_obj, timeout=timeout_s) as resp:
+                content_type = resp.headers.get("Content-Type")
+                etag = resp.headers.get("ETag")
+                last_modified = resp.headers.get("Last-Modified")
+                content_length_header = resp.headers.get("Content-Length")
+                suffix = _phase4_guess_http_suffix(
+                    canonical_http_url,
+                    content_type=content_type,
                 )
-                return str(final_path.resolve()), meta
-            except (HTTPError, URLError, TimeoutError, ValueError, OSError) as exc:
-                if tmp_path is not None:
-                    try:
-                        tmp_path.unlink(missing_ok=True)
-                    except Exception:
-                        pass
-                _append_trace(
-                    {
-                        "ts": time.time(),
-                        "pid": os.getpid(),
-                        "stage": "phase4_http_cache_error",
-                        "image_url": image_url,
-                        "canonical_http_url": canonical_http_url,
-                        "source_key": f"http:{canonical_http_url}",
-                        "error": repr(exc),
-                    }
-                )
-                return None, None
-        finally:
-            fcntl.flock(lock_fp.fileno(), fcntl.LOCK_UN)
+                with tempfile.NamedTemporaryFile(
+                    dir=cache_dir,
+                    prefix=f"{cache_key}.",
+                    suffix=".download",
+                    delete=False,
+                ) as tmp_fp:
+                    total_bytes = 0
+                    while True:
+                        chunk = resp.read(chunk_bytes)
+                        if not chunk:
+                            break
+                        total_bytes += len(chunk)
+                        if total_bytes > max_file_bytes:
+                            raise ValueError(
+                                f"phase4 http image exceeds max bytes: "
+                                f"{total_bytes} > {max_file_bytes}"
+                            )
+                        tmp_fp.write(chunk)
+                    tmp_path = Path(tmp_fp.name)
+
+            final_path = cache_dir / f"{cache_key}{suffix}"
+            os.replace(tmp_path, final_path)
+            tmp_path = None
+
+            meta = {
+                "canonical_http_url": canonical_http_url,
+                "local_path": str(final_path.resolve()),
+                "downloaded_at": time.time(),
+                "content_type": content_type,
+                "content_length": (
+                    int(content_length_header)
+                    if isinstance(content_length_header, str)
+                    and content_length_header.isdigit()
+                    else None
+                ),
+                "etag": etag,
+                "last_modified": last_modified,
+            }
+            with open(meta_path, "w", encoding="utf-8") as meta_fp:
+                json.dump(meta, meta_fp, ensure_ascii=True, sort_keys=True)
+
+            _append_trace(
+                {
+                    "ts": time.time(),
+                    "pid": os.getpid(),
+                    "stage": "phase4_http_cache_fill",
+                    "image_url": image_url,
+                    "canonical_http_url": canonical_http_url,
+                    "local_path": meta["local_path"],
+                    "content_type": content_type,
+                    "content_length": meta["content_length"],
+                    "source_key": f"http:{canonical_http_url}",
+                }
+            )
+            _phase4_prune_http_cache(
+                cache_dir=cache_dir,
+                image_url=image_url,
+                current_cache_key=cache_key,
+            )
+            return str(final_path.resolve()), meta
+        except (HTTPError, URLError, TimeoutError, ValueError, OSError) as exc:
+            if tmp_path is not None:
+                try:
+                    tmp_path.unlink(missing_ok=True)
+                except Exception:
+                    pass
+            _append_trace(
+                {
+                    "ts": time.time(),
+                    "pid": os.getpid(),
+                    "stage": "phase4_http_cache_error",
+                    "image_url": image_url,
+                    "canonical_http_url": canonical_http_url,
+                    "source_key": f"http:{canonical_http_url}",
+                    "error": repr(exc),
+                }
+            )
+            return None, None
+    finally:
+        _phase4_unlock_file(lock_fp)
 
 
 def _local_path_from_url(url: str | None) -> Path | None:
@@ -453,21 +792,28 @@ def _resolve_phase3_local_source_info(image_url: str | None) -> dict | None:
 
 
 def _phase3_local_image_from_path(path: Path, source_info: dict | None = None):
-    if not path.exists():
-        return None
-
-    try:
-        from PIL import Image as PILImage
-
-        with PILImage.open(path) as im:
-            width, height = im.size
-    except Exception:
+    width, height, _ = _phase3_probe_local_image(path)
+    if width is None or height is None:
         return None
 
     return _apply_image_source_metadata(
         _Phase3LocalImageRef(str(path.resolve()), width=width, height=height),
         source_info,
     )
+
+
+def _phase3_probe_local_image(path: Path) -> tuple[int | None, int | None, str | None]:
+    if not path.exists():
+        return None, None, "file_missing"
+
+    try:
+        from PIL import Image as PILImage
+
+        with PILImage.open(path) as im:
+            width, height = im.size
+        return int(width), int(height), None
+    except Exception as exc:
+        return None, None, repr(exc)
 
 
 def _resolve_phase4_http_source_info(
@@ -495,6 +841,12 @@ def _resolve_phase4_http_source_info(
         ),
         "request_scope_key": None,
         "source_key": source_key,
+        "canonical_http_url": canonical_http_url,
+        "cache_key": (
+            _phase4_http_cache_key(canonical_http_url)
+            if isinstance(canonical_http_url, str)
+            else None
+        ),
         "content_type": cache_meta.get("content_type") if isinstance(cache_meta, dict) else None,
         "etag": cache_meta.get("etag") if isinstance(cache_meta, dict) else None,
         "last_modified": cache_meta.get("last_modified") if isinstance(cache_meta, dict) else None,
@@ -546,13 +898,71 @@ def _phase4_http_image_from_url(url: str | None, source_info: dict | None = None
 
     http_source_info = _resolve_phase4_http_source_info(url, source_info)
     if http_source_info is None:
+        canonical_http_url = _canonical_http_url(url)
+        _append_trace(
+            {
+                "ts": time.time(),
+                "pid": os.getpid(),
+                "stage": "phase4_http_fallback_stock",
+                "image_url": url,
+                "canonical_http_url": canonical_http_url,
+                "source_key": (
+                    f"http:{canonical_http_url}"
+                    if isinstance(canonical_http_url, str) and canonical_http_url
+                    else None
+                ),
+                "fallback_reason": "materialize_failed",
+            }
+        )
         return None
 
     local_path = http_source_info.get("local_path")
     if not isinstance(local_path, str):
+        canonical_http_url = http_source_info.get("canonical_http_url")
+        _append_trace(
+            {
+                "ts": time.time(),
+                "pid": os.getpid(),
+                "stage": "phase4_http_fallback_stock",
+                "image_url": url,
+                "canonical_http_url": canonical_http_url,
+                "source_key": http_source_info.get("source_key"),
+                "fallback_reason": "materialized_local_path_missing",
+            }
+        )
         return None
 
-    return _phase3_local_image_from_path(Path(local_path), http_source_info)
+    local_path_obj = Path(local_path)
+    width, height, probe_error = _phase3_probe_local_image(local_path_obj)
+    if width is None or height is None:
+        invalidation = _phase4_invalidate_http_cache(
+            http_source_info.get("canonical_http_url"),
+            image_url=url,
+            local_path=local_path,
+            reason="local_ref_invalid",
+            error=probe_error,
+        )
+        _append_trace(
+            {
+                "ts": time.time(),
+                "pid": os.getpid(),
+                "stage": "phase4_http_fallback_stock",
+                "image_url": url,
+                "canonical_http_url": http_source_info.get("canonical_http_url"),
+                "cache_key": invalidation.get("cache_key"),
+                "local_path": local_path,
+                "source_key": http_source_info.get("source_key"),
+                "fallback_reason": "cache_invalid_local_ref",
+                "error": probe_error,
+                "removed_files": invalidation.get("removed_files"),
+            }
+        )
+        return None
+
+    return _apply_image_source_metadata(
+        _Phase3LocalImageRef(str(local_path_obj.resolve()), width=width, height=height),
+        http_source_info,
+    )
 
 
 def _phase_direct_image_from_url(url: str | None, source_info: dict | None = None):

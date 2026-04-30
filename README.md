@@ -1,108 +1,112 @@
-# 0428 Phase0~4 / Phase3 Direct Encode + Phase4 HTTP Cache 交付工程
+# 0428 API Server 优化交付工程
 
-这个目录用于沉淀当前多模态优化工作的最新可交付版本，目标是在不修改原始安装版
-`vllm` / `vllm-ascend` 的前提下，只依赖本目录就能完成：
+## 1. 工程背景
 
-- `phase0 ~ phase4` 的部署与回归
-- `phase3 direct encode` 与 `phase4 http cache bridge` 的功能验证
-- `local_path / http / base64` 三种 transport 的精度矩阵回归
-- 后续新特性的继续开发
+这个目录用于沉淀当前多模态优化工作的最新可交付版本，目标模型为
+`Qwen3.5-4B`，目标场景是高多图、多模态、大上下文请求。
 
-当前版本明确将 `phase3 direct encode` 作为唯一继续演进的 `phase3` 主方案。
-同时将 `phase4` 固化为 `http` 输入的推荐增强路径。
-历史上的 `phase3-local-only / local-plus` 实验路径已经从接手视角下线，不再作为推荐方案。
+典型负载特征：
 
-## 当前结论
+- 文本约 `10k` token
+- 图片约 `40` 张
+- 部署模式以 `TP4/TP8`、`--enforce-eager`、`mm shm cache` 为主
 
-- `phase0` 仍然是稳定的精度与性能基线
-- `phase3 direct encode` 已经完成：
-  - `local_path` 输入支持
-  - `http` 输入支持
-  - `tp4` 启动与功能验证
-  - 视频请求回退到 stock encoder 的稳定性修复
-- `phase4` 已经完成：
-  - `http/https` 图片先 materialize 到本地缓存池
-  - worker 继续复用 `phase3 direct encode`
-  - `http` 输入性能相对 `phase0 http` 明显改善
-  - `L0 / L0.5 / MME` 三种 transport 回归跑通
-- 当前 `phase3 direct encode` 的主要剩余问题不是服务稳定性，而是多图精度优化
+原始多模态链路里，API server 会承担大量 CPU 侧工作：
 
-## 适用场景
+- 本地图片读取
+- 图片解码
+- HF processor 图像预处理
+- multimodal hash
+- 部分缓存和拷贝相关工作
 
-- 模型：`Qwen3.5-4B`
-- 典型输入：
-  - 约 `10k` 文本 token
-  - `40` 张图片
-- 部署：
-  - `--enforce-eager`
-  - `tp4`
-  - `mm shm cache`
-  - `mm encoder tp mode=data`
+这些逻辑会成为 TTFT 和端到端时延的热点，因此本工程的核心目标是：
 
-## 目录说明
+- 在**不修改安装环境中的 `vllm` / `vllm-ascend` 源码**前提下
+- 通过插件注册、运行期 patch 和启动脚本
+- 逐步把原本压在 API server 上的多模态重处理逻辑下沉到 worker 侧
+
+## 2. 方案总览
+
+本工程已经完成 `phase0 ~ phase4` 全阶段开发。
+
+各阶段职责如下：
+
+- `phase0`：原始链路基线，只补统一性能打点
+- `phase1`：稳定 identity / hash 基础优化
+- `phase2`：下沉链路铺设与 phase plumbing
+- `phase3`：`direct encode` 主方案，当前核心主线
+- `phase4`：面向 `http` 输入的专项优化与缓存可靠性增强
+
+当前主线判断：
+
+- `phase3 direct encode` 是当前本地多模态输入的主方案
+- `phase4` 是在 `phase3` 基础上补齐 `http` 输入优化和可靠性能力
+- 历史上的 `phase3-local-only / local-plus` 已不再作为推荐方案
+
+一句话概括当前方案：
+
+`phase3 = worker 侧 direct encode 主链路`
+
+`phase4 = http 输入先 materialize/缓存到本地，再复用 phase3 worker 链路`
+
+## 3. 当前已经完成的能力
+
+- `tp4` 启动与稳定运行
+- `local_path` 支持
+- `http` 支持
+- `base64` 支持
+- 视频请求保持 stock fallback
+- `L0 / L0.5 / MME` 多轮精度回归
+- `phase4` 坏缓存识别与自愈
+- `phase4` HTTP 缓存上限控制与容量清退
+- `phase4` 失败回退可观测
+
+当前工程状态已经从“服务能否稳定跑起来”转到“多图精度与后续性能优化空间”。
+
+## 4. 文档入口
+
+当前只保留 `docs_0428/` 作为正式文档目录。
+
+建议阅读顺序：
+
+1. `docs_0428/01_整体设计与分阶段设计.md`
+2. `docs_0428/02_部署文档.md`
+3. `docs_0428/03_测试与性能文档.md`
+4. `docs_0428/04_开发日志.md`
+
+如果是新的 session，只看 `docs_0428/` 就应该能理解当前方案、部署方式、测试方法和阶段结论。
+
+## 5. 目录说明
 
 - `bundle/`
-  - 统一启动脚本
+  - 启动脚本
   - vLLM 插件入口
-  - phase1/2/3 和性能 patch
+  - phase patch
 - `scripts/`
-  - 数据准备、性能测试、精度抓取、phase 对比
+  - 服务拉起辅助、精度测试、性能测试、phase 对比、可靠性 smoke
 - `data/`
-  - 本地样例和测试数据根目录
-- `docs/`
-  - 项目背景、设计目标、phase 说明、部署与测试说明
+  - 本地样例和测试数据
+- `docs_0428/`
+  - 当前唯一保留的交付文档集
+- `results/`
+  - 本地回归与测试产物
 
-## 你接手后应该怎么理解这个目录
+## 6. 核心启动方式
 
-如果你是一个新任务，默认按下面顺序理解：
+### 6.1 通用约定
 
-1. 看 `docs/00_project_scope.md`
-2. 看 `docs/01_design.md`
-3. 看 `docs/http输入phase4优化设计.md`
-4. 看 `docs/02_phase_details.md`
-5. 看 `docs/03_deployment.md`
-6. 看 `docs/04_testing.md`
+所有 phase 启动都通过环境变量控制，不要求修改 site-packages，也不要求重打 wheel。
 
-读完之后，你应该知道：
-
-- 我们为什么要做 `phase3 direct encode`
-- 为什么又补了 `phase4`
-- 当前方案和 `phase0 / phase1 / phase2 / phase4` 的差异
-- 怎么启动服务
-- 怎么验证 `local_path / http / base64`
-- 下一阶段应该继续优化什么
-
-## 最常用启动命令
-
-### phase0
-
-```bash
-export MODEL_DIR=/path/to/Qwen3.5-4B
-export ALLOWED_LOCAL_MEDIA_PATH=/path/to/0428/data
-/path/to/0428/bundle/start_phase0_server.sh
-```
-
-### phase3 direct encode
-
-```bash
-export MODEL_DIR=/path/to/Qwen3.5-4B
-export ALLOWED_LOCAL_MEDIA_PATH=/path/to/0428/data
-/path/to/0428/bundle/start_phase3_server.sh
-```
-
-### phase4 http direct encode
+最常用的公共变量如下：
 
 ```bash
 export MODEL_DIR=/mnt/sfs_turbo/models/Qwen/Qwen3.5-4B
-export ALLOWED_LOCAL_MEDIA_PATH=/path/to/0428/data
-export VLLM_ASCEND_HTTP_CACHE_DIR=/tmp/vllm_ascend_http_cache
-export VLLM_ASCEND_HTTP_CACHE_TTL_S=86400
-export VLLM_ASCEND_HTTP_TIMEOUT_S=30
-export VLLM_ASCEND_HTTP_MAX_FILE_BYTES=67108864
-/path/to/0428/bundle/start_phase4_server.sh
+export ALLOWED_LOCAL_MEDIA_PATH=/mnt/sfs_turbo/codes/lzp/0428/data
+export HOST=127.0.0.1
+export PORT=8000
 ```
 
-如果要跑 `tp4 local_path` 精度测试，常用额外参数是：
+如果跑 `tp4`，常用额外变量：
 
 ```bash
 export TENSOR_PARALLEL_SIZE=4
@@ -113,32 +117,69 @@ export GPU_MEMORY_UTILIZATION=0.85
 export MAX_MODEL_LEN=36864
 ```
 
-## phase4 精度矩阵
+### 6.2 phase0
 
-当前 `0428` 新增了统一编排脚本：
+```bash
+export MODEL_DIR=/path/to/Qwen3.5-4B
+export ALLOWED_LOCAL_MEDIA_PATH=/path/to/0428/data
+/path/to/0428/bundle/start_phase0_server.sh
+```
+
+### 6.3 phase3 direct encode
+
+```bash
+export MODEL_DIR=/path/to/Qwen3.5-4B
+export ALLOWED_LOCAL_MEDIA_PATH=/path/to/0428/data
+/path/to/0428/bundle/start_phase3_server.sh
+```
+
+### 6.4 phase4 http cache bridge
+
+推荐缓存配置：
+
+```bash
+export MODEL_DIR=/mnt/sfs_turbo/models/Qwen/Qwen3.5-4B
+export ALLOWED_LOCAL_MEDIA_PATH=/path/to/0428/data
+export VLLM_ASCEND_HTTP_CACHE_DIR=/tmp/vllm_ascend_http_cache
+export VLLM_ASCEND_HTTP_CACHE_MAX_GB=2
+export VLLM_ASCEND_HTTP_CACHE_VERIFY_ON_HIT=1
+export VLLM_ASCEND_MM_FILE_MAP=/tmp/vllm_ascend_mm_file_map.jsonl
+/path/to/0428/bundle/start_phase4_server.sh
+```
+
+说明：
+
+- `VLLM_ASCEND_HTTP_CACHE_MAX_GB=2` 是当前推荐的“合理缓存配置”
+- `VLLM_ASCEND_HTTP_CACHE_VERIFY_ON_HIT=1` 用于命中校验与坏缓存自愈
+- `VLLM_ASCEND_MM_FILE_MAP` 用于保留 phase4 trace，便于排障和验证
+
+## 7. 常用测试方式
+
+### 7.1 Smoke
+
+```bash
+curl -s http://127.0.0.1:8000/v1/models
+```
+
+### 7.2 phase4 三 transport 精度矩阵
+
+当前统一编排脚本：
 
 - `scripts/run_phase4_precision_matrix.py`
 
-它用于在同一 `phase4` 服务上统一回归：
+支持的 transport：
 
-- transport：
-  - `local_path`
-  - `http`
-  - `base64`
-- suite：
-  - `L0`
-  - `L0.5`
-  - `MME`
+- `local_path`
+- `http`
+- `base64`
 
-### 使用方式
+支持的 suite：
 
-先启动 `phase4` 服务，然后准备一个本地静态 HTTP 根：
+- `L0`
+- `L0.5`
+- `MME`
 
-```bash
-python3 -m http.server 9000 --directory /path/to/0428/results/phase4_precision/http_root
-```
-
-再执行：
+示例：
 
 ```bash
 python /path/to/0428/scripts/run_phase4_precision_matrix.py \
@@ -146,70 +187,60 @@ python /path/to/0428/scripts/run_phase4_precision_matrix.py \
   --wait-ready
 ```
 
-默认产物目录：
+如果跑 `http` 模式，需要先准备本地静态 HTTP 根，例如：
 
-- `results/phase4_precision/`
+```bash
+python3 -m http.server 9000 --directory /path/to/0428/results/phase4_precision/http_root
+```
 
-说明：
+### 7.3 可靠性 smoke
 
-- 脚本会自动为 `http` 模式准备 `http_root/l0` 与 `http_root/multi_pics/cases`
-- `MME` 仍依赖本机可用的 `/tmp/MME.tsv`
-- 这些结果默认视为本地运行产物，不作为交付源码的一部分提交
+当前有专门脚本：
 
-### 2026-04-29 最新回归结论
+- `scripts/phase4_reliability_smoke.py`
 
-- `local_path`
-  - `L0`: `10/10`
-  - `L0.5`: `23/40`，accuracy `57.5%`
-  - `MME`: `80.6655%`
-- `http`
-  - `L0`: `10/10`
-  - `L0.5`: `23/40`，accuracy `57.5%`
-  - `MME`: `80.7077%`
-- `base64`
-  - `L0`: `10/10`
-  - `L0.5`: `23/40`，accuracy `57.5%`
-  - `MME`: `80.6655%`
+重点验证：
 
-这轮结果说明：
+- 坏缓存识别与自愈
+- 缓存上限与容量清退
+- phase4 失败回退可观测
 
-1. `phase4` 下三种 transport 的基础链路都已跑通
-2. 历史上的 `http -> base64/local_path` 串扰式 `404/500` 本轮未复现
-3. 当前 `L0.5` 失败 case 在三种 transport 上完全一致，因此剩余问题不是 transport-specific
+## 8. 当前精度结论
 
-## 当前推荐验证项
+在推荐缓存配置下，`phase4/tp4` 三种输入模式的精度结果如下：
 
-- Smoke:
-  - `curl -s http://127.0.0.1:8000/v1/models`
-- `L0 local_path`
-- `L0.5 local_path`
-- `MME local_path`
-- `phase4` 下补齐 `local_path / http / base64` 精度矩阵
+| Transport | L0 | L0.5 | MME exact_acc | MME perception | MME reasoning |
+|---|---:|---:|---:|---:|---:|
+| `local path` | `10/10` | `23/40 = 0.5750` | `80.7498` | `1585.9953` | `567.1429` |
+| `http` | `10/10` | `24/40 = 0.6000` | `80.7919` | `1582.4806` | `574.6429` |
+| `base64` | `10/10` | `24/40 = 0.6000` | `80.8340` | `1586.7159` | `574.6429` |
 
-## 当前支持范围
+当前结论：
 
-`phase3 direct encode` 当前明确支持：
+- `L0` 三种 transport 全通过
+- `L0.5` 上 `http / base64` 略优于 `local path`
+- `MME` 上 `base64` 略优，`http` 非常接近，`local path` 略低，但整体差距不大
 
-- `local_path` 图片输入
-- `local_path` 视频输入
-- `http` 图片输入
-
-其中：
-
-- 本地图片与视频在 `phase3` 下已经可以稳定运行
-- 视频请求会在 worker 侧按当前 patch 逻辑安全回退到 stock encoder 路径
-- `http` 输入已支持，但其性能和稳定性要和 `local_path` 分开评估
-
-`phase4` 额外提供：
-
-- `http/https` 图片输入的本地缓存池桥接
-- 在保持 transport 身份为 `http` 的前提下复用 `phase3 direct encode`
-- 不影响 `local_path` 与 `base64` 的 transport 语义
-
-## 当前重点任务
+## 9. 当前重点任务
 
 后续继续开发时，默认把重点放在：
 
 1. `phase3 direct encode` 多图精度提升
 2. 保持 `phase4 http` 与 `local_path / base64` 的功能正确性
 3. 在不破坏当前稳定性的前提下继续优化 worker 侧热点
+
+## 10. 接手建议
+
+如果是新的会话或新的维护者，建议：
+
+1. 先读 `docs_0428/01_整体设计与分阶段设计.md`
+2. 再读 `docs_0428/02_部署文档.md`
+3. 再读 `docs_0428/03_测试与性能文档.md`
+4. 最后读 `docs_0428/04_开发日志.md`
+5. 然后进入代码：
+   - `bundle/start_phase_server.sh`
+   - `scripts/launch_registered_server.py`
+   - `bundle/vllm_phase2_plugin/register.py`
+   - `bundle/vllm_phase2_plugin/patches/phase1.py`
+   - `bundle/vllm_phase2_plugin/patches/phase2.py`
+   - `bundle/vllm_phase2_plugin/patches/perf.py`
