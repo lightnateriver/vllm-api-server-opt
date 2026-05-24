@@ -49,7 +49,29 @@
 
 `phase4 = http 输入先 materialize/缓存到本地，再复用 phase3 worker 链路`
 
-## 3. 当前已经完成的能力
+## 3. 架构图速览
+
+为了便于快速理解当前方案，建议先按下面三张图建立整体印象，再继续阅读详细设计文档。
+
+### 3.1 原始 stock vLLM 多模态链路
+
+原始链路中，API server 需要承担图片读取、解码、HF processor 预处理、multimodal hash、缓存与序列化等 CPU 侧重处理逻辑；随后再把处理后的多模态数据传递给 engine / worker。
+
+![Stock vLLM multimodal pipeline](docs_0428/assets/stock-vllm-multimodal-pipeline.png)
+
+### 3.2 API Server 下沉后的优化架构
+
+优化后的主链路中，API server 尽量只保留请求解析、tokenizer、source identity、metadata 和 grid 信息；图片读取、HF preprocess、direct encode、all-gather 与 encoder cache 回填下沉到 TP worker 侧执行。HTTP 输入先通过本地缓存桥接为 local file ref，再复用 worker 侧 direct encode 链路。
+
+![API server offload architecture](docs_0428/assets/api-server-offload-architecture.png)
+
+### 3.3 收益来源与性能对比
+
+当前收益主要来自减少 API server 侧 image I/O、decode、HF preprocess、hash、cache / shm copy 与序列化开销，并把重型多模态处理迁移到 worker 侧。典型 HTTP 口径下，TTFT 从约 `3205 ms` 降到约 `1750 ms`，E2E 从约 `7645 ms` 降到约 `6295 ms`。
+
+![API server offload benefits](docs_0428/assets/api-server-offload-benefits.png)
+
+## 4. 当前已经完成的能力
 
 - `tp4` 启动与稳定运行
 - `local_path` 支持
@@ -63,7 +85,7 @@
 
 当前工程状态已经从“服务能否稳定跑起来”转到“多图精度与后续性能优化空间”。
 
-## 4. 文档入口
+## 5. 文档入口
 
 当前只保留 `docs_0428/` 作为正式文档目录。
 
@@ -76,7 +98,7 @@
 
 如果是新的 session，只看 `docs_0428/` 就应该能理解当前方案、部署方式、测试方法和阶段结论。
 
-## 5. 目录说明
+## 6. 目录说明
 
 - `bundle/`
   - 启动脚本
@@ -91,9 +113,9 @@
 - `results/`
   - 本地回归与测试产物
 
-## 6. 核心启动方式
+## 7. 核心启动方式
 
-### 6.1 通用约定
+### 7.1 通用约定
 
 所有 phase 启动都通过环境变量控制，不要求修改 site-packages，也不要求重打 wheel。
 
@@ -117,7 +139,7 @@ export GPU_MEMORY_UTILIZATION=0.85
 export MAX_MODEL_LEN=36864
 ```
 
-### 6.2 phase0
+### 7.2 phase0
 
 ```bash
 export MODEL_DIR=/path/to/Qwen3.5-4B
@@ -125,7 +147,7 @@ export ALLOWED_LOCAL_MEDIA_PATH=/path/to/0428/data
 /path/to/0428/bundle/start_phase0_server.sh
 ```
 
-### 6.3 phase3 direct encode
+### 7.3 phase3 direct encode
 
 ```bash
 export MODEL_DIR=/path/to/Qwen3.5-4B
@@ -133,7 +155,7 @@ export ALLOWED_LOCAL_MEDIA_PATH=/path/to/0428/data
 /path/to/0428/bundle/start_phase3_server.sh
 ```
 
-### 6.4 phase4 http cache bridge
+### 7.4 phase4 http cache bridge
 
 推荐缓存配置：
 
@@ -153,15 +175,15 @@ export VLLM_ASCEND_MM_FILE_MAP=/tmp/vllm_ascend_mm_file_map.jsonl
 - `VLLM_ASCEND_HTTP_CACHE_VERIFY_ON_HIT=1` 用于命中校验与坏缓存自愈
 - `VLLM_ASCEND_MM_FILE_MAP` 用于保留 phase4 trace，便于排障和验证
 
-## 7. 常用测试方式
+## 8. 常用测试方式
 
-### 7.1 Smoke
+### 8.1 Smoke
 
 ```bash
 curl -s http://127.0.0.1:8000/v1/models
 ```
 
-### 7.2 phase4 三 transport 精度矩阵
+### 8.2 phase4 三 transport 精度矩阵
 
 当前统一编排脚本：
 
@@ -193,7 +215,7 @@ python /path/to/0428/scripts/run_phase4_precision_matrix.py \
 python3 -m http.server 9000 --directory /path/to/0428/results/phase4_precision/http_root
 ```
 
-### 7.3 可靠性 smoke
+### 8.3 可靠性 smoke
 
 当前有专门脚本：
 
@@ -205,7 +227,7 @@ python3 -m http.server 9000 --directory /path/to/0428/results/phase4_precision/h
 - 缓存上限与容量清退
 - phase4 失败回退可观测
 
-## 8. 当前精度结论
+## 9. 当前精度结论
 
 在推荐缓存配置下，`phase4/tp4` 三种输入模式的精度结果如下：
 
@@ -221,7 +243,7 @@ python3 -m http.server 9000 --directory /path/to/0428/results/phase4_precision/h
 - `L0.5` 上 `http / base64` 略优于 `local path`
 - `MME` 上 `base64` 略优，`http` 非常接近，`local path` 略低，但整体差距不大
 
-## 9. 当前重点任务
+## 10. 当前重点任务
 
 后续继续开发时，默认把重点放在：
 
@@ -229,7 +251,7 @@ python3 -m http.server 9000 --directory /path/to/0428/results/phase4_precision/h
 2. 保持 `phase4 http` 与 `local_path / base64` 的功能正确性
 3. 在不破坏当前稳定性的前提下继续优化 worker 侧热点
 
-## 10. 接手建议
+## 11. 接手建议
 
 如果是新的会话或新的维护者，建议：
 
