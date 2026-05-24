@@ -67,7 +67,7 @@
 
 ### 3.3 收益来源与性能对比
 
-当前收益主要来自减少 API server 侧 image I/O、decode、HF preprocess、hash、cache / shm copy 与序列化开销，并把重型多模态处理迁移到 worker 侧。典型 HTTP 口径下，TTFT 从约 `3205 ms` 降到约 `1750 ms`，E2E 从约 `7645 ms` 降到约 `6295 ms`。
+当前收益主要来自减少 API server 侧 image I/O、decode、HF preprocess、hash、cache / shm copy 与序列化开销，并把重型多模态处理迁移到多个 TP worker 进程并发执行。原始链路即使在 API server 进程内使用线程池做图像处理，也容易受 Python 运行时、线程调度、图像库行为和 CPU 核利用率不充分等因素影响，无法稳定把机器上的 CPU 并行能力吃满；而模型部署本身通常已经是多 TP，每个 TP worker 都是独立进程。下沉后，40 张图像会按负载切分给多个 TP worker，由多个独立进程分别执行图片读取、decode、HF preprocess 和 direct encode，从而形成更真实、更稳定的多进程并发。典型 HTTP 口径下，TTFT 从约 `3205 ms` 降到约 `1750 ms`，E2E 从约 `7645 ms` 降到约 `6295 ms`。
 
 ![API server offload benefits](docs_0428/assets/api-server-offload-benefits.png)
 
